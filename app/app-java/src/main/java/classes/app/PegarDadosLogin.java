@@ -1,4 +1,4 @@
-package school.sptech.api.looca;
+package classes.app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,8 +12,8 @@ public class PegarDadosLogin {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
-    static final String PASS = "admin";
-    static final String QUERY = "SELECT email, senha FROM Usuario";
+    static final String PASS = "matheus123";
+    static final String QUERY = "SELECT email, password FROM UserHospital";
 
     public List<String> getEmails() {
 
@@ -46,7 +46,7 @@ public class PegarDadosLogin {
             // PEGAR VALORES DO BANCO DE DADOS
             while (rs.next()) {
                 // Retrieve by column name
-                senhaLogin = rs.getString("Senha");
+                senhaLogin = rs.getString("Password");
                 senhas.add(senhaLogin);
             }
         } catch (SQLException e) {
