@@ -1,15 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package classes.app;
 
-/**
- *
- * @author zagreu
- */
-public class InterfaceLogado extends javax.swing.JFrame {
+import classes.getDadosComponentServer.getDadosMemoriaRam;
+import classes.getDadosComponentServer.getDadosProcessador;
 
+public class InterfaceLogado extends javax.swing.JFrame {
+    Integer contador;
     /**
      * Creates new form InterfaceLogado
      */
@@ -27,37 +23,84 @@ public class InterfaceLogado extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        buttonPegarDadosMaquina = new javax.swing.JButton();
+        buttonDesligar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(236, 236, 236));
-        setMinimumSize(new java.awt.Dimension(700, 500));
+        setMinimumSize(new java.awt.Dimension(520, 520));
+        setPreferredSize(new java.awt.Dimension(520, 520));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Você logou");
+        jLabel1.setText("Você logou!");
+
+        buttonPegarDadosMaquina.setBackground(new java.awt.Color(0, 204, 204));
+        buttonPegarDadosMaquina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonPegarDadosMaquina.setForeground(new java.awt.Color(255, 255, 255));
+        buttonPegarDadosMaquina.setText("Pegar dados da máquina");
+        buttonPegarDadosMaquina.setToolTipText("");
+        buttonPegarDadosMaquina.setAutoscrolls(true);
+        buttonPegarDadosMaquina.setBorderPainted(false);
+        buttonPegarDadosMaquina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPegarDadosMaquinaActionPerformed(evt);
+            }
+        });
+
+        buttonDesligar.setText("Desligar");
+        buttonDesligar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDesligarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(300, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(278, 278, 278))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonPegarDadosMaquina)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(buttonDesligar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel1)))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(235, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(169, 169, 169)
                 .addComponent(jLabel1)
-                .addGap(233, 233, 233))
+                .addGap(18, 18, 18)
+                .addComponent(buttonPegarDadosMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonDesligar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void buttonPegarDadosMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPegarDadosMaquinaActionPerformed
+        // TODO add your handling code here:
+        getDadosProcessador getDadosProcessador = new getDadosProcessador();
+        getDadosMemoriaRam getDadosMemoriaRam = new getDadosMemoriaRam();
+        
+        getDadosProcessador.setTipoComponente();
+        getDadosProcessador.setInfoProcessador();
+        
+        getDadosMemoriaRam.setTipoComponente();
+        getDadosMemoriaRam.setInfoMemoriaComponente();
+    }//GEN-LAST:event_buttonPegarDadosMaquinaActionPerformed
+
+    private void buttonDesligarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDesligarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDesligarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -91,6 +134,8 @@ public class InterfaceLogado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDesligar;
+    private javax.swing.JButton buttonPegarDadosMaquina;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

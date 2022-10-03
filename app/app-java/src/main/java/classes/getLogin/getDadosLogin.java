@@ -1,4 +1,4 @@
-package classes.app;
+package classes.getLogin;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PegarDadosLogin {
+public class getDadosLogin {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
