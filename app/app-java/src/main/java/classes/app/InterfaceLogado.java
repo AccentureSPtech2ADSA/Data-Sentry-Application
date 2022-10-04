@@ -1,11 +1,13 @@
-
 package classes.app;
 
+import classes.getDadosComponentServer.getDadosDisco;
 import classes.getDadosComponentServer.getDadosMemoriaRam;
 import classes.getDadosComponentServer.getDadosProcessador;
 
 public class InterfaceLogado extends javax.swing.JFrame {
+
     Integer contador;
+
     /**
      * Creates new form InterfaceLogado
      */
@@ -89,12 +91,16 @@ public class InterfaceLogado extends javax.swing.JFrame {
         // TODO add your handling code here:
         getDadosProcessador getDadosProcessador = new getDadosProcessador();
         getDadosMemoriaRam getDadosMemoriaRam = new getDadosMemoriaRam();
-        
+        getDadosDisco getDadosDisco = new getDadosDisco();
+
         getDadosProcessador.setTipoComponente();
         getDadosProcessador.setInfoProcessador();
-        
+
         getDadosMemoriaRam.setTipoComponente();
-        getDadosMemoriaRam.setInfoMemoriaComponente();
+        getDadosMemoriaRam.setInfoMemoriaRam();
+        
+        getDadosDisco.setTipoComponente();
+        getDadosDisco.setInfoDisco();
     }//GEN-LAST:event_buttonPegarDadosMaquinaActionPerformed
 
     private void buttonDesligarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDesligarActionPerformed

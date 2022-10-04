@@ -81,7 +81,7 @@ CREATE TABLE Process(
 CREATE TABLE ComponentType( 
 	_idComponentType INT PRIMARY KEY AUTO_INCREMENT,
 	description VARCHAR(25), -- colocar o tipo exemplo: CPU, MEMORIA RAM, HD
-	measuramentUnit VARCHAR(5), -- Ghz/Gb/Mhz
+	measuramentUnit VARCHAR(6), -- Ghz/Gb/Mhz
 	createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 	updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP 
 );

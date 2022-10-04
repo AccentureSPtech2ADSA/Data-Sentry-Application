@@ -5,21 +5,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 
 public class getDadosMemoriaRam {
-    //FORMATAR O VALOR DE MEMORIA TOTAL PRA DECIMAL
+    
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
-    static final String PASS = "matheus123";
+    static final String PASS = "admin";
 
     Looca looca = new Looca();
 
-    private Double memoriaEmUso = looca.getMemoria().getEmUso().doubleValue();
-    private Double memoriaEmUsoFormatada = Math.floor(memoriaEmUso);
+    private Long memoriaEmUso = looca.getMemoria().getEmUso();
+    private Double memoriaEmUsoFormatada = memoriaEmUso * 0.000000001;
 
     private Double memoriaTotal = looca.getMemoria().getTotal().doubleValue();
-    private Double memoriaTotalFormada = Math.floor(memoriaTotal);
+    private Double memoriaTotalFormatada = Math.floor(memoriaTotal * 0.000000001);
 
     private Integer fkMemoriaRam = 1;
     private Integer fkTipo = 2;
@@ -30,7 +29,7 @@ public class getDadosMemoriaRam {
     }
 
     public Double getMemoriaTotalFormada() {
-        return memoriaTotalFormada;
+        return memoriaTotalFormatada;
     }
 
     public Integer getFkMemoriaRam() {
@@ -49,7 +48,7 @@ public class getDadosMemoriaRam {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
-            System.out.println("\nInserindo tipo do componente(RAM)");
+            System.out.println("\nInserindo tipo do componente(RAM)\n");
             String sql = String.format("INSERT INTO ComponentType VALUES (NULL, 'Memoria Ram', '%.2f', NULL, NULL)", getMemoriaTotalFormada());
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -57,7 +56,7 @@ public class getDadosMemoriaRam {
         }
     }
 
-    public void setInfoMemoriaComponente() {
+    public void setInfoMemoriaRam() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
@@ -69,13 +68,14 @@ public class getDadosMemoriaRam {
             e.printStackTrace();
         }
     }
-
+    
+    //FALTA TERMINAR FUNÇÃO
     public void getUsoMemoriaRam() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo utilização memoria ram no banco");
-            String sql = String.format("INSERT INTO usoCpu VALUES(NULL, %.2f, %d)", getMemoriaEmUsoFormatada(), getFkMemoriaRam());
+            String sql = String.format("INSERT INTO LogComponentPerProcess VALUES(NULL, %.2f, %d)", getMemoriaEmUsoFormatada(), getFkMemoriaRam());
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();

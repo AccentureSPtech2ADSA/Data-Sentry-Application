@@ -11,7 +11,7 @@ public class getDadosProcessador {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
-    static final String PASS = "matheus123";
+    static final String PASS = "admin";
 
     Looca looca = new Looca();
 
@@ -23,6 +23,7 @@ public class getDadosProcessador {
     private Double frequenciaCpuFormata = frequenciaCpu * 0.000000001;
 
     private Double usoDeCpu = looca.getProcessador().getUso();
+    
     private Integer fkCpu = 1;
     private Integer fkTipo = 1;
     private Integer fkServer = 12345;
@@ -94,12 +95,13 @@ public class getDadosProcessador {
         }
     }
 
+    //FALTA TERMINAR FUNÇÃO
     public void getUsoCpu() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo utilização cpu no banco");
-            String sql = String.format("INSERT INTO usoCpu VALUES(NULL, %.2f, %d)", getUsoDeCpu(), getFkCpu());
+            String sql = String.format("INSERT INTO LogComponentPerProcess VALUES(NULL, %.2f, %d)", getUsoDeCpu(), getFkCpu());
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
