@@ -24,7 +24,7 @@
                     
                     <archive>
                         <manifest>
-                            <InterfaceLogin>school.sptech.api.looca.InterfaceLogin.Demo</InterfaceLogin> 
+                            <mainClass>classes.app.InterfaceLogin</mainClass> 
                         </manifest>
                     </archive>
                 </configuration>
@@ -48,13 +48,7 @@
             <artifactId>looca-api</artifactId>
             <version>1.0.3</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.4.1</version>
-        </dependency>
-    
+           
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
