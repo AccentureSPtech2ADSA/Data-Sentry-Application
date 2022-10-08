@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:app/app-java/src/main/java/classes/app/PegarDadosLogin.java
 package classes.app;
+========
+package classes.getLogin;
+>>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb:app/app-java/src/main/java/classes/getLogin/getDadosLogin.java
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,11 +12,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PegarDadosLogin {
+public class getDadosLogin {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
+<<<<<<<< HEAD:app/app-java/src/main/java/classes/app/PegarDadosLogin.java
     static final String PASS = "matheus123";
+========
+    static final String PASS = "admin";
+>>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb:app/app-java/src/main/java/classes/getLogin/getDadosLogin.java
     static final String QUERY = "SELECT email, password FROM UserHospital";
 
     public List<String> getEmails() {

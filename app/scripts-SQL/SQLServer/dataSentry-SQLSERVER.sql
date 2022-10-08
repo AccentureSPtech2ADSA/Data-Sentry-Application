@@ -19,7 +19,11 @@ CREATE TABLE Hospital(
 );
 
 INSERT INTO Hospital VALUES('12345678901234', '12345678', '15043', 'Unidade de São Paulo 3', '33F', 'Health First', 'Albert Einstein', NULL, NULL);
+<<<<<<< HEAD
 SELECT * FROM Hospital h;
+=======
+--SELECT * FROM Hospital h;
+>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb
 
 --alter table Hospital alter column numberAddress VARCHAR(5);
 --alter table Hospital add unit varchar(25);
@@ -37,8 +41,13 @@ CREATE TABLE contactPhoneHospital(
 CREATE TABLE UserHospital(
 	_idUserHospital INT PRIMARY KEY IDENTITY(1,1),
 	name VARCHAR(100),
+<<<<<<< HEAD
 	email VARBINARY(100),
 	password VARCHAR(100),
+=======
+	email VARCHAR(100),
+	password VARBINARY(100),
+>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb
 	contactPhone CHAR(13),
 	fkHospital INT NOT NULL,
 	FOREIGN KEY (fkHospital) REFERENCES Hospital(_idHospital),
@@ -48,7 +57,15 @@ CREATE TABLE UserHospital(
 	updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
+<<<<<<< HEAD
 --select * from UserHospital uh;
+=======
+--ALTER TABLE UserHospital ALTER COLUMN email VARCHAR(100);
+--ALTER TABLE UserHospital DROP COLUMN password;
+--ALTER TABLE UserHospital ADD password VARBINARY(100);
+
+--SELECT * FROM UserHospital uh;
+>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb
 
 CREATE TABLE Server(
 	_serialServer VARCHAR(30) PRIMARY KEY, -- senão pegar serial vamos pegar outro dado único do PC
@@ -135,7 +152,11 @@ BEGIN
 	VALUES (
 	@name,
 	@email,
+<<<<<<< HEAD
 	ENCRYPTBYKEY(Key_GUID('cryptAesSqlServer'), CONVERT(VARBINARY(MAX), @password)),
+=======
+	ENCRYPTBYKEY(Key_GUID('cryptAesSqlServer'), CONVERT (VARBINARY(MAX), @password)),
+>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb
 	@contactPhone,
 	@fkManager,
 	@fkHospital
@@ -156,9 +177,15 @@ BEGIN
 	CLOSE SYMMETRIC key cryptAesSqlServer
 END;
 
+<<<<<<< HEAD
 --EXEC sp_insereUser 'admin', 'admin@gmail.com', 'admin', '11972595523', null, 1;
 --EXEC sp_loginUser 'admin@gmail.com', 'admin';
 --select * from UserHospital uh;
+=======
+EXEC sp_insereUser 'admin', 'admin@gmail.com', 'admin', '11972595523', null, 1;
+EXEC sp_loginUser 'admin@gmail.com', 'admin';
+select * from UserHospital uh;
+>>>>>>> ab18762fc6e08a5db6e6265ea85d23f8105301bb
 
 
 

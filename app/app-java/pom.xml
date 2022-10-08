@@ -21,10 +21,9 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    
                     <archive>
                         <manifest>
-                            <mainClass>classes.app.InterfaceLogin</mainClass> 
+                            <mainClass>classes.app.InterfaceLogin</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -41,14 +40,14 @@
         </plugins>
     </build>
     
-    
     <dependencies>
         <dependency>
             <groupId>com.github.britooo</groupId>
             <artifactId>looca-api</artifactId>
             <version>1.0.3</version>
+            <type>jar</type>
         </dependency>
-           
+        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
