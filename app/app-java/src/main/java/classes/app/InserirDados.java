@@ -20,6 +20,8 @@ public class InserirDados {
         String dadosNomeProcessador = looca.getProcessador().getNome();
         String dadosFrequenciaProcessador = 
                 looca.getProcessador().getFrequencia().toString();
+        
+        
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
