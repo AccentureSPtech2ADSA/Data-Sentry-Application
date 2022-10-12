@@ -46,6 +46,7 @@ CREATE TABLE UserHospital(
 );
 
 INSERT INTO UserHospital(name, email, password, fkHospital, fkManager) VALUES('Albert Einstein', 'albert@admin.com', 'admin', 1, NULL);
+SELECT * FROM UserHospital;
 
 CREATE TABLE Server(
 	_serialServer VARCHAR(30) PRIMARY KEY, -- senão pegar serial vamos pegar outro dado único do PC -- SERIAL DO SO
@@ -89,8 +90,8 @@ CREATE TABLE ComponentType(
 CREATE TABLE ComponentServer(
 	_idComponentServer INT AUTO_INCREMENT,
 	serial VARCHAR(30), -- SERIAL DO PROCESSADOR É O ID / memoria ram deixar null
-	model VARCHAR(50), -- NOME COMPONENTE
-	brand VARCHAR(25), -- MARCA/FABRICANTE (INTEL, AMD)
+	model VARCHAR(60), -- NOME COMPONENTE -- MUDEI O TAMANHO PARA 60
+	brand VARCHAR(50), -- MARCA/FABRICANTE (INTEL, AMD) - MUDEI O TAMANHO PARA 50
 	fkServer VARCHAR(30) NOT NULL, -- VALOR DA FK DO 
 	FOREIGN KEY (fkServer) REFERENCES Server(_serialServer),
 	fkComponentType INT NOT NULL,

@@ -12,7 +12,7 @@ public class getDadosLogin {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
-    static final String PASS = "admin";
+    static final String PASS = "matheus123";
     static final String QUERY = "SELECT email, password FROM UserHospital";
 
     public List<String> getEmails() {

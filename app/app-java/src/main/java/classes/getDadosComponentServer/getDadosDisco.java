@@ -1,8 +1,5 @@
 package classes.getDadosComponentServer;
 
-import static classes.getDadosComponentServer.getDadosMemoriaRam.DB_URL;
-import static classes.getDadosComponentServer.getDadosMemoriaRam.PASS;
-import static classes.getDadosComponentServer.getDadosMemoriaRam.USER;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscosGroup;
@@ -16,7 +13,7 @@ public class getDadosDisco {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
-    static final String PASS = "admin";
+    static final String PASS = "matheus123";
 
     Looca looca = new Looca();
     
@@ -71,7 +68,7 @@ public class getDadosDisco {
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo tipo do componente(DISCO)\n");
-            String sql = String.format("INSERT INTO ComponentType VALUES (NULL, 'Disco', '%.2f', NULL, NULL)", getTamanhoDiscoFormatado());
+            String sql = "INSERT INTO ComponentType VALUES (NULL, 'Disco', 'GB', NULL, NULL)";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();

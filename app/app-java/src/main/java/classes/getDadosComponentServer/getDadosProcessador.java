@@ -5,13 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Locale;
 
 public class getDadosProcessador {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
-    static final String PASS = "admin";
+    static final String PASS = "matheus123";
 
     Looca looca = new Looca();
 
@@ -73,9 +72,7 @@ public class getDadosProcessador {
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo tipo do componente");
-            String sql = String.format("INSERT INTO ComponentType VALUES "
-                    + "(NULL, 'Processador', '%.2f', NULL, NULL)",
-                    getFrequenciaCpuFormata());
+            String sql = "INSERT INTO ComponentType VALUES (NULL, 'Processador', 'GHz', NULL, NULL)";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
