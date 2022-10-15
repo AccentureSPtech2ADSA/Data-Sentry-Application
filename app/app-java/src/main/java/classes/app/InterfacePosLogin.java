@@ -4,6 +4,12 @@
  */
 package classes.app;
 
+import classes.get.dados.component.server.getDadosDisco;
+import classes.get.dados.component.server.getDadosMemoriaRam;
+import classes.get.dados.component.server.getDadosProcessador;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *
  * @author zagreu
@@ -15,6 +21,67 @@ public class InterfacePosLogin extends javax.swing.JFrame {
      */
     public InterfacePosLogin() {
         initComponents();
+        labelTexto1.setVisible(false);
+        labelTexto2.setVisible(false);
+        labelAcesseADashboard.setVisible(false);
+        buttonParaIrAoSite.setVisible(false);
+        
+        Timer timer = new Timer();
+        final long secondsToGetDatas = (1000 * 3);
+        
+        TimerTask task1 = new TimerTask() {
+            @Override
+            public void run() {
+                getDadosProcessador getDadosProcessador = new getDadosProcessador();
+                getDadosMemoriaRam getDadosMemoriaRam = new getDadosMemoriaRam();
+                getDadosDisco getDadosDisco = new getDadosDisco();
+
+                getDadosProcessador.setTipoComponente();
+                getDadosProcessador.setInfoProcessador();
+
+                getDadosMemoriaRam.setTipoComponente();
+                getDadosMemoriaRam.setInfoMemoriaRam();
+
+                getDadosDisco.setTipoComponente();
+                getDadosDisco.setInfoDisco();
+                
+                labelTextoVariavel.setText("Pegando os dados da CPU...");
+            }
+        };
+        
+        TimerTask task2 = new TimerTask() {
+            @Override
+            public void run() {
+                labelTextoVariavel.setText("Pegando os dados da memória ram...");
+            }
+        };
+        
+        TimerTask task3 = new TimerTask() {
+            @Override
+            public void run() {
+                labelTextoVariavel.setText("Pegando os dados do disco..."); 
+            }
+        };
+        
+        TimerTask taskFinal = new TimerTask() {
+            @Override
+            public void run() {
+                labelTextoVariavel.setVisible(false);
+                labelTexto1.setVisible(true);
+                labelTexto2.setVisible(true);
+                labelAcesseADashboard.setVisible(true);
+                buttonParaIrAoSite.setVisible(true);
+            }
+        };
+        
+        timer.schedule(task1, secondsToGetDatas);
+        try {
+            Thread.sleep(5000);
+        } catch (Exception e) {}
+        
+        timer.schedule(task2, 6000);
+        timer.schedule(task3, 9000);
+        timer.schedule(taskFinal, 12000);
     }
 
     /**
@@ -28,11 +95,16 @@ public class InterfacePosLogin extends javax.swing.JFrame {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
-        jLabel1 = new javax.swing.JLabel();
-        buttonPegarDadosMaquina = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        labelAcesseADashboard = new javax.swing.JLabel();
+        buttonParaIrAoSite = new javax.swing.JButton();
+        labelTexto2 = new javax.swing.JLabel();
+        labelTexto1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        labelTextoVariavel = new javax.swing.JLabel();
+        kGradientPanel3 = new keeptoo.KGradientPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sentinel Target");
@@ -47,64 +119,110 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         kGradientPanel2.setkStartColor(new java.awt.Color(255, 255, 255));
         kGradientPanel2.setPreferredSize(new java.awt.Dimension(1060, 481));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Acesse sua dashboard pelo nosso site:");
-        jLabel1.setToolTipText("");
+        labelAcesseADashboard.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelAcesseADashboard.setForeground(new java.awt.Color(0, 0, 0));
+        labelAcesseADashboard.setText("Acesse sua dashboard pelo nosso site:");
+        labelAcesseADashboard.setToolTipText("");
 
-        buttonPegarDadosMaquina.setBackground(new java.awt.Color(35, 175, 174));
-        buttonPegarDadosMaquina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        buttonPegarDadosMaquina.setForeground(new java.awt.Color(255, 255, 255));
-        buttonPegarDadosMaquina.setText("Data Sentry");
-        buttonPegarDadosMaquina.setToolTipText("");
-        buttonPegarDadosMaquina.setAutoscrolls(true);
-        buttonPegarDadosMaquina.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        buttonPegarDadosMaquina.setBorderPainted(false);
-        buttonPegarDadosMaquina.addActionListener(new java.awt.event.ActionListener() {
+        buttonParaIrAoSite.setBackground(new java.awt.Color(35, 175, 174));
+        buttonParaIrAoSite.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonParaIrAoSite.setForeground(new java.awt.Color(255, 255, 255));
+        buttonParaIrAoSite.setText("Data Sentry");
+        buttonParaIrAoSite.setToolTipText("");
+        buttonParaIrAoSite.setAutoscrolls(true);
+        buttonParaIrAoSite.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        buttonParaIrAoSite.setBorderPainted(false);
+        buttonParaIrAoSite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPegarDadosMaquinaActionPerformed(evt);
+                buttonParaIrAoSiteActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("para sua dashboard");
+        labelTexto2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelTexto2.setForeground(new java.awt.Color(0, 0, 0));
+        labelTexto2.setText("para sua dashboard");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Seus dados estão sendo enviados");
+        labelTexto1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelTexto1.setForeground(new java.awt.Color(0, 0, 0));
+        labelTexto1.setText("Seus dados estão sendo enviados");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
+
+        labelTextoVariavel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelTextoVariavel.setForeground(new java.awt.Color(0, 0, 0));
+        labelTextoVariavel.setText("Pegando os dados do Servidor...");
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
         kGradientPanel2Layout.setHorizontalGroup(
             kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel2Layout.createSequentialGroup()
-                .addGap(369, 369, 369)
+            .addGroup(kGradientPanel2Layout.createSequentialGroup()
+                .addContainerGap(156, Short.MAX_VALUE)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(buttonPegarDadosMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(369, 369, 369))
+                    .addComponent(buttonParaIrAoSite, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAcesseADashboard)
+                    .addComponent(labelTextoVariavel)
+                    .addComponent(labelTexto2)
+                    .addComponent(labelTexto1)
+                    .addComponent(jLabel4))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         kGradientPanel2Layout.setVerticalGroup(
             kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel4)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(55, 55, 55)
-                .addComponent(jLabel1)
+                .addGap(66, 66, 66)
+                .addComponent(labelTexto1)
+                .addGap(0, 0, 0)
+                .addComponent(labelTexto2)
+                .addGap(18, 18, 18)
+                .addComponent(labelTextoVariavel)
+                .addGap(18, 18, 18)
+                .addComponent(labelAcesseADashboard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonPegarDadosMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(buttonParaIrAoSite, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
+
+        kGradientPanel3.setkEndColor(new java.awt.Color(35, 175, 174));
+        kGradientPanel3.setkStartColor(new java.awt.Color(23, 235, 230));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Obrigado por confiar na");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Data Sentry!");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/confiar.png"))); // NOI18N
+
+        javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
+        kGradientPanel3.setLayout(kGradientPanel3Layout);
+        kGradientPanel3Layout.setHorizontalGroup(
+            kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel3Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(73, 73, 73))
+        );
+        kGradientPanel3Layout.setVerticalGroup(
+            kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel3Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        kGradientPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2});
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -112,15 +230,19 @@ public class InterfacePosLogin extends javax.swing.JFrame {
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                    .addComponent(kGradientPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,9 +259,9 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonPegarDadosMaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPegarDadosMaquinaActionPerformed
+    private void buttonParaIrAoSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonParaIrAoSiteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPegarDadosMaquinaActionPerformed
+    }//GEN-LAST:event_buttonParaIrAoSiteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,12 +299,17 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonPegarDadosMaquina;
+    private javax.swing.JButton buttonParaIrAoSite;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
+    private keeptoo.KGradientPanel kGradientPanel3;
+    private javax.swing.JLabel labelAcesseADashboard;
+    private javax.swing.JLabel labelTexto1;
+    private javax.swing.JLabel labelTexto2;
+    private javax.swing.JLabel labelTextoVariavel;
     // End of variables declaration//GEN-END:variables
 }
