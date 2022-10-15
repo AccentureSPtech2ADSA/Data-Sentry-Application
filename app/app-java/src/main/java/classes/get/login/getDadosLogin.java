@@ -1,4 +1,4 @@
-package classes.getLogin;
+package classes.get.login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

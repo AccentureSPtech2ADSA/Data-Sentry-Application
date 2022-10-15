@@ -1,4 +1,4 @@
-package classes.getDadosComponentServer;
+package classes.get.dados.component.server;
 
 import com.github.britooo.looca.api.core.Looca;
 import java.sql.Connection;

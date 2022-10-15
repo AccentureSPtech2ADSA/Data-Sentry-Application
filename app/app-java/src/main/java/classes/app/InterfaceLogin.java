@@ -4,11 +4,14 @@
  */
 package classes.app;
 
-import classes.getDadosComponentServer.getDadosDisco;
-import classes.getDadosComponentServer.getDadosMemoriaRam;
-import classes.getDadosComponentServer.getDadosProcessador;
-import classes.getLogin.getDadosLogin;
+import classes.fontes.FonteManager;
+import classes.get.dados.component.server.getDadosDisco;
+import classes.get.dados.component.server.getDadosMemoriaRam;
+import classes.get.dados.component.server.getDadosProcessador;
+import classes.get.login.getDadosLogin;
+import java.awt.Font;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class InterfaceLogin extends javax.swing.JFrame {
 
@@ -65,7 +68,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         senha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         senha.setSelectedTextColor(new java.awt.Color(255, 255, 255));
 
-        buttonLogin.setBackground(new java.awt.Color(0, 204, 204));
+        buttonLogin.setBackground(new java.awt.Color(35, 175, 174));
         buttonLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonLogin.setForeground(new java.awt.Color(255, 255, 255));
         buttonLogin.setText("LOGAR");
@@ -311,7 +314,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
