@@ -251,7 +251,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
             if (emailLogin.equals(pegarDadosDeLogin.getEmails().get(i))
                     && senhaLogin.equals(pegarDadosDeLogin.getSenhas().get(i))) {
                 System.out.println("Você achou um e-mail e senha igual! Logado!");
-                InterfaceLoading logado = new InterfaceLoading();
+                InterfacePosLogin logado = new InterfacePosLogin();
                 this.dispose();
                 logado.setVisible(true);
                 isLogado = true;
