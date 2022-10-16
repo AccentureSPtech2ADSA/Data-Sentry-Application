@@ -24,19 +24,17 @@ public class GetDadosDisco {
     private Integer fkTipo = 3;
     private String fkServer = getDadosServer.getMotherboardSerialWindows();
 
-    private String nomeDisco = discos.get(1).getNome();
+    private String nomeDisco;
 
-    private String modeloDisco = discos.get(1).getModelo();
+    private String modeloDisco;
 
-    private String serialDisco = discos.get(1).getSerial();
+    private String serialDisco;
 
-    private Double tamanhoDisco = discos.get(1).getTamanho().doubleValue();
+    private Double tamanhoDisco;
 
-    private Double tamanhoDiscoFormatado
-            = Math.floor(tamanhoDisco * 0.000000001);
+    private Double tamanhoDiscoFormatado;
 
-    private String replaceVirgulaTamanhoDiscoFormatado
-            = tamanhoDiscoFormatado.toString().replaceAll("\\,", ".");
+    private String replaceVirgulaTamanhoDiscoFormatado;
 
     public void setTipoComponente() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -56,12 +54,23 @@ public class GetDadosDisco {
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo informações do componente(DISCO)");
-            String sql = String.format("INSERT INTO ComponentServer"
-                    + "(serial, model, brand, maxUse, fkServer, fkComponentType)"
-                    + " VALUES ('%s', '%s', '%s', '%s', '%s', %d)",
-                    serialDisco.trim(), modeloDisco, nomeDisco,
-                    replaceVirgulaTamanhoDiscoFormatado, fkServer, fkTipo);
-            stmt.executeUpdate(sql);
+            for (int i = 0; i < discos.size(); i++) {
+                nomeDisco = discos.get(i).getNome();
+                modeloDisco = discos.get(i).getModelo();
+                serialDisco = discos.get(i).getSerial();
+                tamanhoDisco = discos.get(i).getTamanho().doubleValue();
+                tamanhoDiscoFormatado = Math.floor(tamanhoDisco * 0.000000001);
+                replaceVirgulaTamanhoDiscoFormatado = tamanhoDiscoFormatado.toString().replaceAll("\\,", ".");
+
+                String sql = String.format("INSERT INTO ComponentServer"
+                        + "(serial, model, brand, maxUse, fkServer, fkComponentType)"
+                        + " VALUES ('%s', '%s', '%s', '%s', '%s', %d)",
+                        serialDisco.trim(), modeloDisco, nomeDisco,
+                        replaceVirgulaTamanhoDiscoFormatado, fkServer, fkTipo);
+
+                stmt.executeUpdate(sql);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

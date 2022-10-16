@@ -155,7 +155,7 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         labelTexto1.setForeground(new java.awt.Color(0, 0, 0));
         labelTexto1.setText("Seus dados estão sendo enviados");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         labelTextoVariavel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTextoVariavel.setForeground(new java.awt.Color(0, 0, 0));
@@ -205,7 +205,7 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Data Sentry!");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/confiar.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/confiar.png"))); // NOI18N
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
