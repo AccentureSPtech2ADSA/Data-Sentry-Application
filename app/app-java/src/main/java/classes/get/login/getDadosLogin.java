@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class getDadosLogin {
+public class GetDadosLogin {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";

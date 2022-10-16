@@ -4,10 +4,10 @@
  */
 package classes.app;
 
-import classes.get.dados.component.server.getDadosDisco;
-import classes.get.dados.component.server.getDadosMemoriaRam;
-import classes.get.dados.component.server.getDadosProcessador;
-import classes.get.login.getDadosLogin;
+import classes.get.dados.component.server.GetDadosDisco;
+import classes.get.dados.component.server.GetDadosMemoriaRam;
+import classes.get.dados.component.server.GetDadosProcessador;
+import classes.get.login.GetDadosLogin;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
@@ -238,7 +238,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         // TODO add your handling code here:
-        getDadosLogin pegarDadosDeLogin = new getDadosLogin();
+        GetDadosLogin pegarDadosDeLogin = new GetDadosLogin();
 
         String emailLogin = email.getText();
         String senhaLogin = String.valueOf(senha.getPassword());

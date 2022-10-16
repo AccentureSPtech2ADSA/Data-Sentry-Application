@@ -4,9 +4,10 @@
  */
 package classes.app;
 
-import classes.get.dados.component.server.getDadosDisco;
-import classes.get.dados.component.server.getDadosMemoriaRam;
-import classes.get.dados.component.server.getDadosProcessador;
+import classes.get.dados.component.server.GetDadosDisco;
+import classes.get.dados.component.server.GetDadosMemoriaRam;
+import classes.get.dados.component.server.GetDadosProcessador;
+import classes.get.dados.component.server.GetDadosServer;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,16 +26,19 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         labelTexto2.setVisible(false);
         labelAcesseADashboard.setVisible(false);
         buttonParaIrAoSite.setVisible(false);
-        
+
         Timer timer = new Timer();
         final long secondsToGetDatas = (1000 * 3);
-        
+
         TimerTask task1 = new TimerTask() {
             @Override
             public void run() {
-                getDadosProcessador getDadosProcessador = new getDadosProcessador();
-                getDadosMemoriaRam getDadosMemoriaRam = new getDadosMemoriaRam();
-                getDadosDisco getDadosDisco = new getDadosDisco();
+                GetDadosProcessador getDadosProcessador = new GetDadosProcessador();
+                GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
+                GetDadosDisco getDadosDisco = new GetDadosDisco();
+                GetDadosServer getDadosServer = new GetDadosServer();
+
+                getDadosServer.setServerInfo();
 
                 getDadosProcessador.setTipoComponente();
                 getDadosProcessador.setInfoProcessador();
@@ -44,41 +48,46 @@ public class InterfacePosLogin extends javax.swing.JFrame {
 
                 getDadosDisco.setTipoComponente();
                 getDadosDisco.setInfoDisco();
-                
+
                 labelTextoVariavel.setText("Pegando os dados da CPU...");
             }
         };
-        
+
         TimerTask task2 = new TimerTask() {
             @Override
             public void run() {
                 labelTextoVariavel.setText("Pegando os dados da memória ram...");
             }
         };
-        
+
         TimerTask task3 = new TimerTask() {
             @Override
             public void run() {
-                labelTextoVariavel.setText("Pegando os dados do disco..."); 
+                labelTextoVariavel.setText("Pegando os dados do disco...");
             }
         };
-        
+
         TimerTask taskFinal = new TimerTask() {
             @Override
             public void run() {
+                Timer timerCancel = new Timer();
+
                 labelTextoVariavel.setVisible(false);
                 labelTexto1.setVisible(true);
                 labelTexto2.setVisible(true);
                 labelAcesseADashboard.setVisible(true);
                 buttonParaIrAoSite.setVisible(true);
+
+                timerCancel.cancel();
+                timerCancel.purge();
             }
         };
-        
+
         timer.schedule(task1, secondsToGetDatas);
         try {
-            Thread.sleep(5000);
-        } catch (Exception e) {}
-        
+            Thread.sleep(4000);
+        } catch (Exception e) {
+        }
         timer.schedule(task2, 6000);
         timer.schedule(task3, 9000);
         timer.schedule(taskFinal, 12000);
