@@ -1,6 +1,7 @@
 package classes.get.dados.component.server;
 
 import com.github.britooo.looca.api.core.Looca;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +14,6 @@ public class GetDadosMemoriaRam {
     static final String PASS = "matheus123";
 
     Looca looca = new Looca();
-    GetDadosServer getDadosServer = new GetDadosServer();
 
     private Long memoriaEmUso = looca.getMemoria().getEmUso();
 
@@ -29,7 +29,12 @@ public class GetDadosMemoriaRam {
 
     private Integer fkMemoriaRam = 1;
     private Integer fkTipo = 2;
-    private String fkServer = getDadosServer.getMotherboardSerialWindows();
+    private String fkServer;
+    
+    public GetDadosMemoriaRam() throws IOException {
+        GetDadosServer getDadosServer = new GetDadosServer();
+        fkServer = getDadosServer.getMotherboardSerial();
+    }
 
     public void setTipoComponente() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);

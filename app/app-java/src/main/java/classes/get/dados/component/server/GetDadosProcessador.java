@@ -1,6 +1,7 @@
 package classes.get.dados.component.server;
 
 import com.github.britooo.looca.api.core.Looca;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +14,6 @@ public class GetDadosProcessador {
     static final String PASS = "matheus123";
 
     Looca looca = new Looca();
-    GetDadosServer getDadosServer = new GetDadosServer();
 
     private String nomeCpu = looca.getProcessador().getNome();
 
@@ -35,7 +35,12 @@ public class GetDadosProcessador {
 
     private Integer fkCpu = 1;
     private Integer fkTipo = 1;
-    private String fkServer = getDadosServer.getMotherboardSerialWindows();
+    private String fkServer;
+    
+    public GetDadosProcessador() throws IOException {
+        GetDadosServer getDadosServer = new GetDadosServer();
+        fkServer = getDadosServer.getMotherboardSerial();
+    }
 
     public Looca getLooca() {
         return looca;

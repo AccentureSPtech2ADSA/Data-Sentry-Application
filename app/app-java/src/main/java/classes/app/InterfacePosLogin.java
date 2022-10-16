@@ -8,8 +8,11 @@ import classes.get.dados.component.server.GetDadosDisco;
 import classes.get.dados.component.server.GetDadosMemoriaRam;
 import classes.get.dados.component.server.GetDadosProcessador;
 import classes.get.dados.component.server.GetDadosServer;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,23 +36,27 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         TimerTask task1 = new TimerTask() {
             @Override
             public void run() {
-                GetDadosProcessador getDadosProcessador = new GetDadosProcessador();
-                GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
-                GetDadosDisco getDadosDisco = new GetDadosDisco();
-                GetDadosServer getDadosServer = new GetDadosServer();
+                try {
+                    GetDadosProcessador getDadosProcessador = new GetDadosProcessador();
+                    GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
+                    GetDadosDisco getDadosDisco = new GetDadosDisco();
+                    GetDadosServer getDadosServer = new GetDadosServer();
 
-                getDadosServer.setServerInfo();
+                    getDadosServer.setServerInfo();
 
-                getDadosProcessador.setTipoComponente();
-                getDadosProcessador.setInfoProcessador();
+                    getDadosProcessador.setTipoComponente();
+                    getDadosProcessador.setInfoProcessador();
 
-                getDadosMemoriaRam.setTipoComponente();
-                getDadosMemoriaRam.setInfoMemoriaRam();
+                    getDadosMemoriaRam.setTipoComponente();
+                    getDadosMemoriaRam.setInfoMemoriaRam();
 
-                getDadosDisco.setTipoComponente();
-                getDadosDisco.setInfoDisco();
+                    getDadosDisco.setTipoComponente();
+                    getDadosDisco.setInfoDisco();
 
-                labelTextoVariavel.setText("Pegando os dados da CPU...");
+                    labelTextoVariavel.setText("Pegando os dados da CPU...");
+                } catch (IOException ex) {
+                    Logger.getLogger(InterfacePosLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
 

@@ -4,11 +4,17 @@ import com.github.britooo.looca.api.core.Looca;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GetDadosServer {
 
@@ -18,7 +24,10 @@ public class GetDadosServer {
 
     Looca looca = new Looca();
 
-    private String serialWindows = "";
+    private String serialWindows;
+    private String serialLinux;
+    private String serialServer;
+
     private String isActive = "A";
     private String description = "Sistema operacional: " + looca.getSistema().getSistemaOperacional();
     private Integer fkHospital = 1;
@@ -53,6 +62,55 @@ public class GetDadosServer {
         return serialWindows.trim();
     }
 
+    public String getMotherboardSerialLinux() throws SocketException {
+        serialLinux = null;
+        Map<String, String> addressByNetwork = new HashMap<>();
+        Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+        while (networkInterfaces.hasMoreElements()) {
+            NetworkInterface network = networkInterfaces.nextElement();
+            byte[] bmac = network.getHardwareAddress();
+            if (bmac != null) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < bmac.length; i++) {
+                    sb.append(String.format("%02X%s", bmac[i], (i < bmac.length - 1) ? "-" : ""));
+                }
+                if (sb.toString().isEmpty() == false) {
+                    addressByNetwork.put(network.getName(), sb.toString());
+                }
+                if (sb.toString().isEmpty() == false && serialLinux == null) {
+                    serialLinux = network.getName();
+                }
+            }
+        }
+
+        if (serialLinux != null) {
+            return addressByNetwork.get(serialLinux).replaceAll("-", "");
+        }
+
+        return null;
+    }
+
+    final String getMotherboardSerial() throws IOException {
+        String os = System.getProperty("os.name");
+
+        try {
+            if (os.startsWith("Windows")) {
+                return getMotherboardSerialWindows();
+            } else if (os.startsWith("Linux")) {
+                return getMotherboardSerialLinux();
+            } else {
+                throw new IOException("unknown operating system: " + os);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IOException(ex.getMessage());
+        }
+    }
+
+    public GetDadosServer() throws IOException {
+        serialServer = getMotherboardSerial();
+    }
+
     public void setServerInfo() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
@@ -61,7 +119,7 @@ public class GetDadosServer {
             String sql = String.format("INSERT INTO Server"
                     + "(_serialServer, isActive, description, fkHospital) VALUES"
                     + " ('%s', '%s', '%s', %d)",
-                    getMotherboardSerialWindows(), isActive, description, fkHospital);
+                    serialServer, isActive, description, fkHospital);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
