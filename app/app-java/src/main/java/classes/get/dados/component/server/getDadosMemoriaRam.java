@@ -6,50 +6,39 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class getDadosMemoriaRam {
-    
+public class GetDadosMemoriaRam {
+
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
     static final String PASS = "matheus123";
 
     Looca looca = new Looca();
+    GetDadosServer getDadosServer = new GetDadosServer();
 
     private Long memoriaEmUso = looca.getMemoria().getEmUso();
+
     private Double memoriaEmUsoFormatada = memoriaEmUso * 0.000000001;
 
     private Double memoriaTotal = looca.getMemoria().getTotal().doubleValue();
-    private Double memoriaTotalFormatada = Math.floor(memoriaTotal * 0.000000001);
+
+    private Double memoriaTotalFormatada
+            = Math.floor(memoriaTotal * 0.000000001);
+
+    private String replaceVirgulaMemoriaTotalFormatada
+            = memoriaTotalFormatada.toString().toString().replaceAll("\\,", ".");
 
     private Integer fkMemoriaRam = 1;
     private Integer fkTipo = 2;
-    private Integer fkServer = 12345;
-
-    public Double getMemoriaEmUsoFormatada() {
-        return memoriaEmUsoFormatada;
-    }
-
-    public Double getMemoriaTotalFormada() {
-        return memoriaTotalFormatada;
-    }
-
-    public Integer getFkMemoriaRam() {
-        return fkMemoriaRam;
-    }
-
-    public Integer getFkTipo() {
-        return fkTipo;
-    }
-
-    public Integer getFkServer() {
-        return fkServer;
-    }
+    private String fkServer = getDadosServer.getMotherboardSerialWindows();
 
     public void setTipoComponente() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo tipo do componente(RAM)\n");
-            String sql = "INSERT INTO ComponentType VALUES (NULL, 'Memoria Ram', 'GB', NULL, NULL)";
+            String sql = "INSERT INTO ComponentType"
+                    + "(description, measuramentUnit) "
+                    + "VALUES ('Memoria Ram', 'GB')";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,14 +50,17 @@ public class getDadosMemoriaRam {
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo informações do componente(RAM)");
-            String sql = String.format("INSERT INTO ComponentServer VALUES (NULL, NULL, 'Memoria Ram', NULL, %d, %d, NULL, NULL)",
-                    getFkServer(), getFkTipo());
+            String sql = String.format("INSERT INTO ComponentServer"
+                    + "(serial, model, brand, maxUse, fkServer, fkComponentType)"
+                    + " VALUES (NULL, 'Memoria Ram', NULL, '%s', '%s', %d)",
+                    replaceVirgulaMemoriaTotalFormatada, fkServer, fkTipo);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
+    /*
     //FALTA TERMINAR FUNÇÃO
     public void getUsoMemoriaRam() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -81,4 +73,5 @@ public class getDadosMemoriaRam {
             e.printStackTrace();
         }
     }
+     */
 }

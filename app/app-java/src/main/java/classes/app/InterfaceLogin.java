@@ -4,14 +4,11 @@
  */
 package classes.app;
 
-import classes.fontes.FonteManager;
-import classes.get.dados.component.server.getDadosDisco;
-import classes.get.dados.component.server.getDadosMemoriaRam;
-import classes.get.dados.component.server.getDadosProcessador;
-import classes.get.login.getDadosLogin;
-import java.awt.Font;
+import classes.get.dados.component.server.GetDadosDisco;
+import classes.get.dados.component.server.GetDadosMemoriaRam;
+import classes.get.dados.component.server.GetDadosProcessador;
+import classes.get.login.GetDadosLogin;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 public class InterfaceLogin extends javax.swing.JFrame {
 
@@ -98,7 +95,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha:");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,7 +171,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Obrigado pela confiança!");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gostar (3).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gostar (3).png"))); // NOI18N
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
@@ -241,7 +238,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         // TODO add your handling code here:
-        getDadosLogin pegarDadosDeLogin = new getDadosLogin();
+        GetDadosLogin pegarDadosDeLogin = new GetDadosLogin();
 
         String emailLogin = email.getText();
         String senhaLogin = String.valueOf(senha.getPassword());
@@ -251,24 +248,10 @@ public class InterfaceLogin extends javax.swing.JFrame {
             if (emailLogin.equals(pegarDadosDeLogin.getEmails().get(i))
                     && senhaLogin.equals(pegarDadosDeLogin.getSenhas().get(i))) {
                 System.out.println("Você achou um e-mail e senha igual! Logado!");
-                InterfaceLoading logado = new InterfaceLoading();
+                InterfacePosLogin logado = new InterfacePosLogin();
                 this.dispose();
                 logado.setVisible(true);
                 isLogado = true;
-
-                getDadosProcessador getDadosProcessador = new getDadosProcessador();
-                getDadosMemoriaRam getDadosMemoriaRam = new getDadosMemoriaRam();
-                getDadosDisco getDadosDisco = new getDadosDisco();
-
-                getDadosProcessador.setTipoComponente();
-                getDadosProcessador.setInfoProcessador();
-
-                getDadosMemoriaRam.setTipoComponente();
-                getDadosMemoriaRam.setInfoMemoriaRam();
-
-                getDadosDisco.setTipoComponente();
-                getDadosDisco.setInfoDisco();
-
                 break;
             } else {
                 isLogado = false;

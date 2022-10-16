@@ -9,66 +9,42 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class getDadosDisco {
+public class GetDadosDisco {
 
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
     static final String PASS = "matheus123";
 
     Looca looca = new Looca();
-    
-    private Integer fkDisco = 1;
-    private Integer fkTipo = 3;
-    private Integer fkServer = 12345;
-
+    GetDadosServer getDadosServer = new GetDadosServer();
     DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
     List<Disco> discos = grupoDeDiscos.getDiscos();
 
-    private String nomeDisco = discos.get(0).getNome();
-    private String modeloDisco = discos.get(0).getModelo();
-    private String serialDisco = discos.get(0).getSerial();
-    private Double tamanhoDisco = discos.get(0).getTamanho().doubleValue();
-    private Double tamanhoDiscoFormatado = Math.floor(tamanhoDisco * 0.000000001);
+    private Integer fkDisco = 1;
+    private Integer fkTipo = 3;
+    private String fkServer = getDadosServer.getMotherboardSerialWindows();
 
-    public Integer getFkDisco() {
-        return fkDisco;
-    }
+    private String nomeDisco = discos.get(1).getNome();
 
-    public Integer getFkTipo() {
-        return fkTipo;
-    }
+    private String modeloDisco = discos.get(1).getModelo();
 
-    public Integer getFkServer() {
-        return fkServer;
-    }
+    private String serialDisco = discos.get(1).getSerial();
 
-    public String getNomeDisco() {
-        return nomeDisco;
-    }
+    private Double tamanhoDisco = discos.get(1).getTamanho().doubleValue();
 
-    public String getModeloDisco() {
-        return modeloDisco;
-    }
+    private Double tamanhoDiscoFormatado
+            = Math.floor(tamanhoDisco * 0.000000001);
 
-    public String getSerialDisco() {
-        return serialDisco;
-    }
+    private String replaceVirgulaTamanhoDiscoFormatado
+            = tamanhoDiscoFormatado.toString().replaceAll("\\,", ".");
 
-    public Double getTamanhoDisco() {
-        return tamanhoDisco;
-    }
-
-    public Double getTamanhoDiscoFormatado() {
-        return tamanhoDiscoFormatado;
-    }
-    
-        public void setTipoComponente() {
-            System.out.println(getTamanhoDiscoFormatado());
+    public void setTipoComponente() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo tipo do componente(DISCO)\n");
-            String sql = "INSERT INTO ComponentType VALUES (NULL, 'Disco', 'GB', NULL, NULL)";
+            String sql = "INSERT INTO ComponentType(description, measuramentUnit)"
+                    + " VALUES ('Disco', 'GB')";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,12 +56,14 @@ public class getDadosDisco {
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo informações do componente(DISCO)");
-            String sql = String.format("INSERT INTO ComponentServer VALUES (NULL, '%s', '%s', NULL, %d, %d, NULL, NULL)",
-                    getSerialDisco(), getModeloDisco(), getFkServer(), getFkTipo());
+            String sql = String.format("INSERT INTO ComponentServer"
+                    + "(serial, model, brand, maxUse, fkServer, fkComponentType)"
+                    + " VALUES ('%s', '%s', '%s', '%s', '%s', %d)",
+                    serialDisco.trim(), modeloDisco, nomeDisco,
+                    replaceVirgulaTamanhoDiscoFormatado, fkServer, fkTipo);
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }
