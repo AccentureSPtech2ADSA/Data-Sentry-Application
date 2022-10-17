@@ -44,12 +44,13 @@ public class GetDadosMemoriaRam {
     private Integer fkTipo = 2;
     private String fkServer;
 
-    public GetDadosMemoriaRam() throws IOException {
+    public GetDadosMemoriaRam() throws IOException, ClassNotFoundException {
         GetDadosServer getDadosServer = new GetDadosServer();
         fkServer = getDadosServer.getMotherboardSerial();
     }
 
-    public void setTipoComponente() {
+    public void setTipoComponente() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
@@ -63,7 +64,8 @@ public class GetDadosMemoriaRam {
         }
     }
 
-    public void setInfoMemoriaRam() {
+    public void setInfoMemoriaRam() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS

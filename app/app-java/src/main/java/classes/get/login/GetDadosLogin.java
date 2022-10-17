@@ -27,8 +27,9 @@ public class GetDadosLogin {
             + "encrypt=true;trustServerCertificate=false;"
             + "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
-    public boolean isLoginValido(String email, String senha) {
+    public String isLoginValido(String email, String senha) throws ClassNotFoundException {
         Boolean existe = false;
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(String.format("exec sp_loginUser '%s', '%s';", email, senha));) {
@@ -42,7 +43,8 @@ public class GetDadosLogin {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return existe;
+        return String.valueOf(existe);
     }
 }

@@ -50,7 +50,7 @@ public class GetDadosProcessador {
     private Integer fkTipo = 1;
     private String fkServer;
 
-    public GetDadosProcessador() throws IOException {
+    public GetDadosProcessador() throws IOException, ClassNotFoundException, ClassNotFoundException {
         GetDadosServer getDadosServer = new GetDadosServer();
         fkServer = getDadosServer.getMotherboardSerial();
     }
@@ -59,7 +59,8 @@ public class GetDadosProcessador {
         return looca;
     }
 
-    public void setTipoComponente() {
+    public void setTipoComponente() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
@@ -73,7 +74,8 @@ public class GetDadosProcessador {
         }
     }
 
-    public void setInfoProcessador() {
+    public void setInfoProcessador() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS

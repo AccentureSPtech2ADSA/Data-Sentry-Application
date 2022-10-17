@@ -44,12 +44,13 @@ public class GetDadosDisco {
     private Double tamanhoDiscoFormatado;
     private String replaceVirgulaTamanhoDiscoFormatado;
 
-    public GetDadosDisco() throws IOException {
+    public GetDadosDisco() throws IOException, ClassNotFoundException {
         GetDadosServer getDadosServer = new GetDadosServer();
         fkServer = getDadosServer.getMotherboardSerial();
     }
 
-    public void setTipoComponente() {
+    public void setTipoComponente() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
@@ -62,8 +63,8 @@ public class GetDadosDisco {
         }
     }
 
-    public void setInfoDisco() {
-        
+    public void setInfoDisco() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS

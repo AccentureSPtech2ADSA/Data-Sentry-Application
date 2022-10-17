@@ -37,21 +37,26 @@ public class InterfacePosLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    GetDadosProcessador getDadosProcessador = new GetDadosProcessador();
-                    GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
-                    GetDadosDisco getDadosDisco = new GetDadosDisco();
-                    GetDadosServer getDadosServer = new GetDadosServer();
+                    GetDadosProcessador getDadosProcessador;
+                    try {
+                        getDadosProcessador = new GetDadosProcessador();
+                        GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
+                        GetDadosDisco getDadosDisco = new GetDadosDisco();
+                        GetDadosServer getDadosServer = new GetDadosServer();
 
-                    getDadosServer.setServerInfo();
+                        getDadosServer.setServerInfo();
 
-                    getDadosProcessador.setTipoComponente();
-                    getDadosProcessador.setInfoProcessador();
+                        getDadosProcessador.setTipoComponente();
+                        getDadosProcessador.setInfoProcessador();
 
-                    getDadosMemoriaRam.setTipoComponente();
-                    getDadosMemoriaRam.setInfoMemoriaRam();
+                        getDadosMemoriaRam.setTipoComponente();
+                        getDadosMemoriaRam.setInfoMemoriaRam();
 
-                    getDadosDisco.setTipoComponente();
-                    getDadosDisco.setInfoDisco();
+                        getDadosDisco.setTipoComponente();
+                        getDadosDisco.setInfoDisco();
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(InterfacePosLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
                     labelTextoVariavel.setText("Pegando os dados da CPU...");
                 } catch (IOException ex) {

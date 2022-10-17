@@ -45,8 +45,9 @@ public class GetDadosServer {
     private String description = "Sistema operacional: " + looca.getSistema().getSistemaOperacional();
     private Integer fkHospital = 1;
 
-    public String getMotherboardSerialWindows() {
+    public String getMotherboardSerialWindows() throws ClassNotFoundException {
         serialWindows = "";
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try {
             File file = File.createTempFile("realhowto", ".vbs");
             file.deleteOnExit();
@@ -103,9 +104,9 @@ public class GetDadosServer {
         return null;
     }
 
-    final String getMotherboardSerial() throws IOException {
+    final String getMotherboardSerial() throws IOException, ClassNotFoundException {
         String os = System.getProperty("os.name");
-
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try {
             if (os.startsWith("Windows")) {
                 return getMotherboardSerialWindows();
@@ -120,11 +121,12 @@ public class GetDadosServer {
         }
     }
 
-    public GetDadosServer() throws IOException {
+    public GetDadosServer() throws IOException, ClassNotFoundException {
         serialServer = getMotherboardSerial();
     }
 
-    public void setServerInfo() {
+    public void setServerInfo() throws ClassNotFoundException {
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS

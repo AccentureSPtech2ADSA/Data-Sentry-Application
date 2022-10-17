@@ -5,6 +5,8 @@
 package classes.app;
 
 import classes.get.login.GetDadosLogin;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
@@ -239,16 +241,24 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
         String emailLogin = email.getText();
         String senhaLogin = String.valueOf(senha.getPassword());
-        Boolean isLogado = pegarDadosDeLogin.isLoginValido(emailLogin, senhaLogin);
+        String isLogado = "";
+        try {
+            isLogado = pegarDadosDeLogin.isLoginValido(emailLogin, senhaLogin);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InterfaceLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        if (isLogado == true) {
+        if (isLogado.equals("true")) {
             System.out.println("Login realizado!");
             InterfacePosLogin logado = new InterfacePosLogin();
             this.dispose();
             logado.setVisible(true);
         } else {
             System.out.println("E-mail ou senha incorreto!");
-            JOptionPane.showMessageDialog(this, "E-mail ou senha incorreto!");
+            //JOptionPane.showMessageDialog(this, "E-mail ou senha incorreto!");
+            JOptionPane.showMessageDialog(this, isLogado);
+            JOptionPane.showMessageDialog(this, emailLogin);
+            JOptionPane.showMessageDialog(this, senhaLogin);
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
