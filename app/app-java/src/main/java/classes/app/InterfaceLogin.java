@@ -4,9 +4,6 @@
  */
 package classes.app;
 
-import classes.get.dados.component.server.GetDadosDisco;
-import classes.get.dados.component.server.GetDadosMemoriaRam;
-import classes.get.dados.component.server.GetDadosProcessador;
 import classes.get.login.GetDadosLogin;
 import javax.swing.JOptionPane;
 
@@ -242,24 +239,13 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
         String emailLogin = email.getText();
         String senhaLogin = String.valueOf(senha.getPassword());
-        Boolean isLogado = true;
-
-        for (int i = 0; i < pegarDadosDeLogin.getTamanhoLista(); i++) {
-            if (emailLogin.equals(pegarDadosDeLogin.getEmails().get(i))
-                    && senhaLogin.equals(pegarDadosDeLogin.getSenhas().get(i))) {
-                System.out.println("Você achou um e-mail e senha igual! Logado!");
-                InterfacePosLogin logado = new InterfacePosLogin();
-                this.dispose();
-                logado.setVisible(true);
-                isLogado = true;
-                break;
-            } else {
-                isLogado = false;
-            }
-        }
-
+        Boolean isLogado = pegarDadosDeLogin.isLoginValido(emailLogin, senhaLogin);
+        
         if (isLogado == true) {
             System.out.println("Login realizado!");
+            InterfacePosLogin logado = new InterfacePosLogin();
+            this.dispose();
+            logado.setVisible(true);
         } else {
             System.out.println("E-mail ou senha incorreto!");
             JOptionPane.showMessageDialog(this, "E-mail ou senha incorreto!");
@@ -297,7 +283,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

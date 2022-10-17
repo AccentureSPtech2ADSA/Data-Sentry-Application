@@ -8,10 +8,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class GetDadosMemoriaRam {
-
+    //CONEXÃO LOCAL - WORKBENCH
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
     static final String PASS = "matheus123";
+    
+    /*PARA CONECTAR NO WORKBECH,
+    PASSE ESSE VALOR EM TODAS AS CLASSES QUE POSSUEM O GET CONNECTION
+    VALOR: DB_URL, USER, PASS*/
+
+
+    // CONEXÃO SQL SERVER - AZURE
+    String connectionUrl
+            = "jdbc:sqlserver://datasentry.database.windows.net:1433;"
+            + "database=datasentry;user=datasentry@datasentry;"
+            + "password=#Gfgrupo1;"
+            + "encrypt=true;trustServerCertificate=false;"
+            + "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
     Looca looca = new Looca();
 
@@ -30,14 +43,14 @@ public class GetDadosMemoriaRam {
     private Integer fkMemoriaRam = 1;
     private Integer fkTipo = 2;
     private String fkServer;
-    
+
     public GetDadosMemoriaRam() throws IOException {
         GetDadosServer getDadosServer = new GetDadosServer();
         fkServer = getDadosServer.getMotherboardSerial();
     }
 
     public void setTipoComponente() {
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo tipo do componente(RAM)\n");
@@ -51,7 +64,7 @@ public class GetDadosMemoriaRam {
     }
 
     public void setInfoMemoriaRam() {
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();) {
             // INSERIR NO BANCO DE DADOS
             System.out.println("\nInserindo informações do componente(RAM)");

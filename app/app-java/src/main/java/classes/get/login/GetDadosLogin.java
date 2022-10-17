@@ -10,69 +10,39 @@ import java.util.List;
 
 public class GetDadosLogin {
 
+    //CONEXÃO LOCAL - WORKBENCH
     static final String DB_URL = "jdbc:mysql://localhost/dataSentry";
     static final String USER = "root";
     static final String PASS = "matheus123";
     static final String QUERY = "SELECT email, password FROM UserHospital";
 
-    public List<String> getEmails() {
+    /*PARA CONECTAR NO WORKBECH,
+    PASSE ESSE VALOR EM TODAS AS CLASSES QUE POSSUEM O GET CONNECTION
+    VALOR: DB_URL, USER, PASS*/
+    // CONEXÃO SQL SERVER - AZURE
+    String connectionUrl
+            = "jdbc:sqlserver://datasentry.database.windows.net:1433;"
+            + "database=datasentry;user=datasentry@datasentry;"
+            + "password=#Gfgrupo1;"
+            + "encrypt=true;trustServerCertificate=false;"
+            + "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
-        String emailLogin;
-        List<String> emails = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+    public boolean isLoginValido(String email, String senha) {
+        Boolean existe = false;
+        try (Connection conn = DriverManager.getConnection(connectionUrl);
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(QUERY);) {
+                ResultSet rs = stmt.executeQuery(String.format("exec sp_loginUser '%s', '%s';", email, senha));) {
             // PEGAR VALORES DO BANCO DE DADOS
             while (rs.next()) {
                 // Retrieve by column name
-                emailLogin = rs.getString("Email");
-                emails.add(emailLogin);
+                Integer id = rs.getInt("id");
+                if (id != null && id > 0) {
+                    existe = true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return emails;
-    }
-
-    public List<String> getSenhas() {
-
-        String senhaLogin;
-        List<String> senhas = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(QUERY);) {
-
-            // PEGAR VALORES DO BANCO DE DADOS
-            while (rs.next()) {
-                // Retrieve by column name
-                senhaLogin = rs.getString("Password");
-                senhas.add(senhaLogin);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return senhas;
-    }
-
-    public Integer getTamanhoLista() {
-
-        Integer tamanhoLista = 0;
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(QUERY);) {
-
-            // PEGAR VALORES DO BANCO DE DADOS
-            while (rs.next()) {
-                // Retrieve by column name
-                rs.getString("Email");
-                tamanhoLista++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return tamanhoLista;
+        return existe;
     }
 }
