@@ -36,13 +36,9 @@ public class GetDadosProcessador {
 
     private String serialProcessador = looca.getProcessador().getId();
 
-    private Double frequenciaCpu
-            = looca.getProcessador().getFrequencia().doubleValue();
-
+    private Double frequenciaCpu = looca.getProcessador().getFrequencia().doubleValue();
     private Double frequenciaCpuFormata = frequenciaCpu * 0.000000001;
-
-    private String replaceVirgulaFrequenciaCpuFormatada
-            = frequenciaCpuFormata.toString().replaceAll("\\,", ".");
+    private String replaceVirgulaFrequenciaCpuFormatada = frequenciaCpuFormata.toString().replaceAll("\\,", ".");
 
     private Double usoDeCpu = looca.getProcessador().getUso();
 
