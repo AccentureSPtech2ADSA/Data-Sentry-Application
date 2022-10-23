@@ -4,10 +4,6 @@
  */
 package classes.app;
 
-import classes.get.dados.component.server.GetDadosDisco;
-import classes.get.dados.component.server.GetDadosMemoriaRam;
-import classes.get.dados.component.server.GetDadosProcessador;
-import classes.get.dados.component.server.GetDadosServer;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,7 +30,6 @@ public class InterfacePosLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 
-                GetDadosProcessador getDadosProcessador = new GetDadosProcessador();
                 /*
                 GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
                 

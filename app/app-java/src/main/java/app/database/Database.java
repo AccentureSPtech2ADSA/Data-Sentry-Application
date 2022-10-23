@@ -9,11 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Database {
 
-  private static final String USER = "SA";
-  private static final String DATABASE_NAME = "datasentry";
+  private static final String USER = "datasentry";
   private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
   private static final String PASS = "#Gfgrupo1";
-  private static final String DB_URL = "jdbc:sqlserver://;serverName=localhost;encrypt=true;trustServerCertificate=true;databaseName=datasentry";
+    private static final String DB_URL = "jdbc:sqlserver://;serverName=datasentry.database.windows.net;encrypt=true;trustServerCertificate=true;databaseName=datasentry";
+
   private static JdbcTemplate conn = null;
 
   public static JdbcTemplate getConn() {

@@ -4,10 +4,6 @@
  */
 package classes.app;
 
-import classes.get.dados.component.server.GetDadosDisco;
-import classes.get.dados.component.server.GetDadosMemoriaRam;
-import classes.get.dados.component.server.GetDadosProcessador;
-import classes.get.login.GetDadosLogin;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
@@ -237,33 +233,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
-        GetDadosLogin pegarDadosDeLogin = new GetDadosLogin();
-
-        String emailLogin = email.getText();
-        String senhaLogin = String.valueOf(senha.getPassword());
-        Boolean isLogado = true;
-
-        for (int i = 0; i < pegarDadosDeLogin.getTamanhoLista(); i++) {
-            if (emailLogin.equals(pegarDadosDeLogin.getEmails().get(i))
-                    && senhaLogin.equals(pegarDadosDeLogin.getSenhas().get(i))) {
-                System.out.println("Você achou um e-mail e senha igual! Logado!");
-                InterfacePosLogin logado = new InterfacePosLogin();
-                this.dispose();
-                logado.setVisible(true);
-                isLogado = true;
-                break;
-            } else {
-                isLogado = false;
-            }
-        }
-
-        if (isLogado == true) {
-            System.out.println("Login realizado!");
-        } else {
-            System.out.println("E-mail ou senha incorreto!");
-            JOptionPane.showMessageDialog(this, "E-mail ou senha incorreto!");
-        }
+        
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
