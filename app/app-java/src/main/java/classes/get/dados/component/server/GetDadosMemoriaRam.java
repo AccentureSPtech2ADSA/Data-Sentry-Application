@@ -29,17 +29,10 @@ public class GetDadosMemoriaRam {
     Looca looca = new Looca();
 
     private Long memoriaEmUso = looca.getMemoria().getEmUso();
-
     private Double memoriaEmUsoFormatada = memoriaEmUso * 0.000000001;
-
     private Double memoriaTotal = looca.getMemoria().getTotal().doubleValue();
-
-    private Double memoriaTotalFormatada
-            = Math.floor(memoriaTotal * 0.000000001);
-
-    private String replaceVirgulaMemoriaTotalFormatada
-            = memoriaTotalFormatada.toString().toString().replaceAll("\\,", ".");
-
+    private Double memoriaTotalFormatada = Math.floor(memoriaTotal * 0.000000001);
+    private String replaceVirgulaMemoriaTotalFormatada = memoriaTotalFormatada.toString().toString().replaceAll("\\,", ".");
     private Integer fkMemoriaRam = 1;
     private Integer fkTipo = 2;
     private String fkServer;
