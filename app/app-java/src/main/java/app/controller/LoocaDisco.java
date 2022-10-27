@@ -28,8 +28,7 @@ public class LoocaDisco {
     for (Disco disk : looca.getGrupoDeDiscos().getDiscos()) {
        DiscoModel disco = new DiscoModel();
        disco.setNomeDisco(disk.getNome());
-       disco.setTamanhoDisco(disk.getTamanho());
-       
+       disco.setTamanhoDisco((double)disk.getTamanho());
        discos.add(disco);
     }
     return discos;

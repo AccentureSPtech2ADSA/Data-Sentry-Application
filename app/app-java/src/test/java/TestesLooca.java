@@ -8,20 +8,33 @@ import java.io.InputStreamReader;
 public class TestesLooca {
 
     private String serialWindows;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
     public static void main(String[] args) {
 
         Looca looca = new Looca();
         TestesLooca tl = new TestesLooca();
+<<<<<<< HEAD
 
         //System.out.println(looca.getSistema().getSistemaOperacional());
         //System.out.println(looca.getSistema().getArquitetura());
         //System.out.println(looca.getSistema().getFabricante());
         // System.out.println(looca.getSistema());
+=======
+        
+        //System.out.println(looca.getSistema().getSistemaOperacional());
+        //System.out.println(looca.getSistema().getArquitetura());
+        //System.out.println(looca.getSistema().getFabricante());
+        //System.out.println(looca.getSistema());
+>>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
         //System.out.println(looca.getGrupoDeDiscos().getDiscos().get(1).getSerial());
         //System.out.println(looca.getGrupoDeDiscos().getDiscos().get(1).getModelo());
         //System.out.println(looca.getGrupoDeDiscos().getDiscos().get(1).getNome());
         
+<<<<<<< HEAD
         System.out.println(tl.getMotherboardSerialWindows());
         //System.out.println(looca.getSistema().getSistemaOperacional());
 
@@ -57,4 +70,10 @@ public class TestesLooca {
         System.out.println(result);
         return result.trim();
     }
+=======
+        System.out.println(looca.getGrupoDeProcessos());
+        System.out.println(looca.getGrupoDeProcessos().getProcessos());
+        
+    } 
+>>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
 }

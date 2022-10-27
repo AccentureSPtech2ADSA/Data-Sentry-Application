@@ -4,8 +4,15 @@
  */
 package classes.app;
 
+import classes.get.dados.component.server.GetDadosDisco;
+import classes.get.dados.component.server.GetDadosMemoriaRam;
+import classes.get.dados.component.server.GetDadosProcessador;
+import classes.get.dados.component.server.GetDadosServer;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,29 +36,32 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         TimerTask task1 = new TimerTask() {
             @Override
             public void run() {
-                
-                /*
-                GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
-                
-                GetDadosDisco getDadosDisco = new GetDadosDisco();
-                GetDadosServer getDadosServer = new GetDadosServer();
-                
-                getDadosServer.getMotherboardSerial();
-                getDadosServer.setServerInfo();
-                System.out.println("Depois:");
-                
-                getDadosProcessador.setTipoComponente();
-                getDadosProcessador.setInfoProcessador();
+                try {
+                    GetDadosProcessador getDadosProcessador;
+                    try {
+                        getDadosProcessador = new GetDadosProcessador();
+                        GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
+                        GetDadosDisco getDadosDisco = new GetDadosDisco();
+                        GetDadosServer getDadosServer = new GetDadosServer();
 
-                getDadosMemoriaRam.setTipoComponente();
-                getDadosMemoriaRam.setInfoMemoriaRam();
-                
-                getDadosDisco.setTipoComponente();
-                getDadosDisco.setInfoDisco();
+                        getDadosServer.setServerInfo();
 
-                labelTextoVariavel.setText("Pegando os dados da CPU...");
-                */
-                System.out.println("Antes:");
+                        getDadosProcessador.setTipoComponente();
+                        getDadosProcessador.setInfoProcessador();
+
+                        getDadosMemoriaRam.setTipoComponente();
+                        getDadosMemoriaRam.setInfoMemoriaRam();
+
+                        getDadosDisco.setTipoComponente();
+                        getDadosDisco.setInfoDisco();
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(InterfacePosLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    labelTextoVariavel.setText("Pegando os dados da CPU...");
+                } catch (IOException ex) {
+                    Logger.getLogger(InterfacePosLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
 
@@ -157,7 +167,7 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         labelTexto1.setForeground(new java.awt.Color(0, 0, 0));
         labelTexto1.setText("Seus dados estão sendo enviados");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         labelTextoVariavel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTextoVariavel.setForeground(new java.awt.Color(0, 0, 0));
@@ -207,7 +217,7 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Data Sentry!");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/confiar.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/confiar.png"))); // NOI18N
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
