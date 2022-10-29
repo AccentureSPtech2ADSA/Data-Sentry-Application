@@ -27,21 +27,21 @@ public class ComponentDAO {
     public Integer insertDisco(DiscoModel disco) throws IOException, ClassNotFoundException {
         String sql = String.format(
                 "INSERT INTO ComponentServer (%s, %s, %s, %s, %s, %s)"
-                + " VALUES ('?', '?', '?', '?', '?', 3)",
+                + " VALUES (?, ?, ?, ?, ?, 3)",
                 SERIAL, MODEL, BRAND, MAXUSE, FKSERVER, FKTYPE);
         return conn.update(sql, disco.getSerialDisco(), disco.getModeloDisco(), disco.getNomeDisco(), disco.getReplaceVirgulaTamanhoDisco(), disco.getSerialDisco());
     }
 
     public Integer insertProcessador(ProcessadorModel processador) throws IOException, ClassNotFoundException {
         String sql = String.format("INSERT INTO ComponentServer (%s, %s, %s, %s, %s, %s)"
-                + " VALUES ('?', '?', '?', '?', '?', 1)",
+                + " VALUES (?, ?, ?, ?, ?, 1)",
                 SERIAL, MODEL, BRAND, MAXUSE, FKSERVER, FKTYPE);
         return conn.update(sql, processador.getSerial(), processador.getModel(), processador.getBrand(), processador.getMaxUse(), processador.getSerial());
     }
 
     public Integer insertMemoriaRam(MemoriaRamModel memoriaRam) throws IOException, ClassNotFoundException {
         String sql = String.format("INSERT INTO ComponentServer (%s, %s, %s, %s, %s, %s)"
-                + " VALUES ('?', '?', '?', '?', '?', 2)",
+                + " VALUES (?, ?, ?, ?, ?, 2)",
                 SERIAL, MODEL, BRAND, MAXUSE, FKSERVER, FKTYPE);
         return conn.update(sql, memoriaRam.getSerial(), memoriaRam.getModel(), memoriaRam.getBrand(), memoriaRam.getMaxUse(), memoriaRam.getSerial());
     }

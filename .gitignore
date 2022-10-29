@@ -1,3 +1,5 @@
 /app-SQLWORKBENCH/app-local/target/
 /app/app-local/target/
 /app/app-java/target/
+/bot telegram/bot-telegram/target/
+/bot telegram/vendedor-exercicio/target/
