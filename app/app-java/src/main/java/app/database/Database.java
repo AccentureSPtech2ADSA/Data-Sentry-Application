@@ -13,7 +13,8 @@ public class Database {
       try {
         conn = new JdbcTemplate(ambiente.getDatasource());
       } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println(e.getMessage());
+        System.out.println("Houve algum erro ao conectar no ambiente " + ambiente);
       }
     }
     return conn;

@@ -45,4 +45,16 @@ public class ServerModel {
     this.fkHospital = fkHospital;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("ServerModel = [");
+    sb.append("\n    _serialServer : ").append(_serialServer);
+    sb.append("\n    IsActive : ").append(isActive);
+    sb.append("\n    Description : ").append(description);
+    sb.append("\n    FkHospital : ").append(fkHospital);
+    sb.append("\n],\n");
+    return sb.toString();
+  }
+
 }
