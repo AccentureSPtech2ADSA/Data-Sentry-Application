@@ -1,116 +1,74 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package classes.app;
 
-import classes.get.dados.component.server.GetDadosDisco;
-import classes.get.dados.component.server.GetDadosMemoriaRam;
-import classes.get.dados.component.server.GetDadosProcessador;
-import classes.get.dados.component.server.GetDadosServer;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author zagreu
- */
 public class InterfacePosLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InterfacePosLogin
-     */
-    public InterfacePosLogin() {
-        initComponents();
-        labelTexto1.setVisible(false);
-        labelTexto2.setVisible(false);
-        labelAcesseADashboard.setVisible(false);
-        buttonParaIrAoSite.setVisible(false);
+  public InterfacePosLogin() {
+    initComponents();
+    labelTexto1.setVisible(false);
+    labelTexto2.setVisible(false);
+    labelAcesseADashboard.setVisible(false);
+    buttonParaIrAoSite.setVisible(false);
 
-        Timer timer = new Timer();
-        final long secondsToGetDatas = (1000 * 3);
+    Timer timer = new Timer();
+    final long secondsToGetDatas = (1000 * 3);
 
-        TimerTask task1 = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    GetDadosProcessador getDadosProcessador;
-                    try {
-                        getDadosProcessador = new GetDadosProcessador();
-                        GetDadosMemoriaRam getDadosMemoriaRam = new GetDadosMemoriaRam();
-                        GetDadosDisco getDadosDisco = new GetDadosDisco();
-                        GetDadosServer getDadosServer = new GetDadosServer();
+    TimerTask task1 = new TimerTask() {
+      @Override
+      public void run() {
+            // set server
+            // set chip
+            // set mem
+            // set disk
 
-                        getDadosServer.setServerInfo();
+          labelTextoVariavel.setText("Pegando os dados da CPU...");
+        
+      }
+    };
 
-                        getDadosProcessador.setTipoComponente();
-                        getDadosProcessador.setInfoProcessador();
+    TimerTask task2 = new TimerTask() {
+      @Override
+      public void run() {
+        labelTextoVariavel.setText("Pegando os dados da memória ram...");
+      }
+    };
 
-                        getDadosMemoriaRam.setTipoComponente();
-                        getDadosMemoriaRam.setInfoMemoriaRam();
+    TimerTask task3 = new TimerTask() {
+      @Override
+      public void run() {
+        labelTextoVariavel.setText("Pegando os dados do disco...");
+      }
+    };
 
-                        getDadosDisco.setTipoComponente();
-                        getDadosDisco.setInfoDisco();
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(InterfacePosLogin.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+    TimerTask taskFinal = new TimerTask() {
+      @Override
+      public void run() {
+        Timer timerCancel = new Timer();
 
-                    labelTextoVariavel.setText("Pegando os dados da CPU...");
-                } catch (IOException ex) {
-                    Logger.getLogger(InterfacePosLogin.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        };
+        labelTextoVariavel.setVisible(false);
+        labelTexto1.setVisible(true);
+        labelTexto2.setVisible(true);
+        labelAcesseADashboard.setVisible(true);
+        buttonParaIrAoSite.setVisible(true);
 
-        TimerTask task2 = new TimerTask() {
-            @Override
-            public void run() {
-                labelTextoVariavel.setText("Pegando os dados da memória ram...");
-            }
-        };
+        timerCancel.cancel();
+        timerCancel.purge();
+      }
+    };
 
-        TimerTask task3 = new TimerTask() {
-            @Override
-            public void run() {
-                labelTextoVariavel.setText("Pegando os dados do disco...");
-            }
-        };
-
-        TimerTask taskFinal = new TimerTask() {
-            @Override
-            public void run() {
-                Timer timerCancel = new Timer();
-
-                labelTextoVariavel.setVisible(false);
-                labelTexto1.setVisible(true);
-                labelTexto2.setVisible(true);
-                labelAcesseADashboard.setVisible(true);
-                buttonParaIrAoSite.setVisible(true);
-
-                timerCancel.cancel();
-                timerCancel.purge();
-            }
-        };
-
-        timer.schedule(task1, secondsToGetDatas);
-        try {
-            Thread.sleep(4000);
-        } catch (Exception e) {
-        }
-        timer.schedule(task2, 6000);
-        timer.schedule(task3, 9000);
-        timer.schedule(taskFinal, 12000);
+    timer.schedule(task1, secondsToGetDatas);
+    try {
+      Thread.sleep(4000);
+    } catch (Exception e) {
     }
+    timer.schedule(task2, 6000);
+    timer.schedule(task3, 9000);
+    timer.schedule(taskFinal, 12000);
+  }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -281,43 +239,17 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonParaIrAoSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonParaIrAoSiteActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_buttonParaIrAoSiteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+  public static void main(String args[]) {
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfacePosLogin().setVisible(true);
-            }
-        });
-    }
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      public void run() {
+        new InterfacePosLogin().setVisible(true);
+      }
+    });
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonParaIrAoSite;
