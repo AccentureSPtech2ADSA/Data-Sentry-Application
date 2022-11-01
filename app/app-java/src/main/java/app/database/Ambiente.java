@@ -1,19 +1,22 @@
 package app.database;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public enum Ambiente {
-  DOCKER_LOCAL(DatabaseData.MYSQL),
-  AZURE_CLOUD(DatabaseData.MSSQL);
-
+  DOCKER_LOCAL(DatabaseData.MYSQL, "LOCAL"),
+  AZURE_CLOUD(DatabaseData.MSSQL, "PROD");
   private DatabaseData dbData;
+  private String ambientName;
 
-  Ambiente(DatabaseData db) {
+  Ambiente(DatabaseData db, String ambient) {
     this.dbData = db;
+    ambientName = ambient;
   }
 
+  String getAmbient(){
+    return this.ambientName;
+  }
   BasicDataSource getDatasource() {
     BasicDataSource dataSource = new BasicDataSource();
     dataSource.setDriverClassName(dbData.getDriver());
