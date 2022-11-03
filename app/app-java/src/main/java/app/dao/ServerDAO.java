@@ -20,7 +20,7 @@ public class ServerDAO extends Dao{
     return conn.update(query, server.getSerialServer(), server.getIsActive(), server.getDescription(), server.getFkHospital());
   }
   
-  public Boolean componentExists(String serial) {
+  private Boolean componentExists(String serial) {
     String query = String.format("SELECT 1 FROM "
             + "Server WHERE _serialServer = ?");
 
@@ -29,14 +29,5 @@ public class ServerDAO extends Dao{
     return !queryForList.isEmpty();
   }
   
-  public static void main(String[] args) throws Exception {
-    ServerDAO dao = new ServerDAO();
-    ServerController server = new ServerController();
-    
-    try {
-      dao.save(server.getServer());
-    } catch (IOException | ClassNotFoundException e) {
-      System.out.println("Erro: "+e.getMessage());
-    }
-  }
+ 
 }

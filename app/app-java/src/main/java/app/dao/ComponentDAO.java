@@ -40,7 +40,7 @@ public class ComponentDAO extends Dao {
     );
   }
 
-  public Boolean componentExists(String serial) {
+  private Boolean componentExists(String serial) {
     String query = String.format("SELECT 1 FROM "
             + "ComponentServer WHERE serial = ?");
 

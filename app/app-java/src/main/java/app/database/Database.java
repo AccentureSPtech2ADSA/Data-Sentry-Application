@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class Database {
 
   private static JdbcTemplate conn = null;
-  private static Ambiente ambiente = Ambiente.AZURE_CLOUD;
+  public static Ambiente ambiente = Ambiente.AZURE_CLOUD;
   
   public static JdbcTemplate getConn() {
     

@@ -1,4 +1,4 @@
-package classes.app;
+package classes.app.gui;
 
 public class InterfaceLoading extends javax.swing.JFrame {
 

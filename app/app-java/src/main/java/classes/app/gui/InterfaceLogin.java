@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package classes.app;
+package classes.app.gui;
 
 import app.dao.UserDAO;
+import app.database.Ambiente;
+import app.database.Database;
 import app.model.UserModel;
+import classes.app.cli.LoginCli;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
@@ -253,12 +252,31 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
   public static void main(String args[]) {
-
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        new InterfaceLogin().setVisible(true);
-      }
-    });
+    String ambient = System.getenv().getOrDefault("AMBIENT_DATASENTRY", "PROD");
+    String isGraphical = System.getenv().getOrDefault("GUI_DATASENTRY", "GUI");
+    Database.ambiente = ambient.equalsIgnoreCase("PROD")
+            ? Ambiente.AZURE_CLOUD
+            : Ambiente.DOCKER_LOCAL;
+    System.out.println(ambient);
+    System.out.println(isGraphical);
+    if (isGraphical.equals("CLI")) {
+      LoginCli cli = new LoginCli();
+      if(cli.hasConsole()){
+        if(cli.welcome()){
+           cli.readEmail();
+           cli.readPassword();
+           
+           UserDAO userDao = new UserDAO();
+           userDao.login(cli.getEmail(), cli.getPass());
+        }
+      }else System.out.println("Não tem console");
+    }else if(isGraphical.equals("GUI")){
+      java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+          new InterfaceLogin().setVisible(true);
+        }
+      });
+    }
   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

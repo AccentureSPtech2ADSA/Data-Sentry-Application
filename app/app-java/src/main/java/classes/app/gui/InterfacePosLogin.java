@@ -1,4 +1,4 @@
-package classes.app;
+package classes.app.gui;
 
 import java.util.Timer;
 import java.util.TimerTask;
