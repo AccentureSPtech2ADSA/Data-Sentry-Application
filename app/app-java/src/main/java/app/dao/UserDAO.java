@@ -18,7 +18,7 @@ public class UserDAO extends Dao {
 
                 String name = (String) map.get("name");
                 System.out.println("Login efetuado com sucesso");
-                System.out.println("Seja bem vindo(a) "+ name);
+                System.out.println("Seja bem vindo(a) " + name);
                 Integer id = (int) map.get("id");
                 Integer fkHospital = (int) map.get("fkHospital");
 
@@ -34,8 +34,4 @@ public class UserDAO extends Dao {
     }
   }
 
-  public static void main(String[] args) {
-    UserDAO dao = new UserDAO();
-    dao.login("albert@admin.com", "admin");
-  }
 }
