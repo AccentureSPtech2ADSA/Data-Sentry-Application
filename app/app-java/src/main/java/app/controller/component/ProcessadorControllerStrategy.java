@@ -2,6 +2,7 @@ package app.controller.component;
 
 import app.model.ComponentModel;
 import app.model.ComponentTypeEnum;
+import app.model.CpuComponentModel;
 import com.github.britooo.looca.api.group.processador.Processador;
 
 public class ProcessadorControllerStrategy extends ComponentControllerStrategy {
@@ -12,14 +13,14 @@ public class ProcessadorControllerStrategy extends ComponentControllerStrategy {
   }
   @Override
   public ComponentModel getComponent(String fkServer) {
-    ComponentModel model = new ComponentModel();
+    CpuComponentModel model = new CpuComponentModel();
     model.setComponentType(ComponentTypeEnum.CPU);
     model.setBrand(processador.getFabricante());
     model.setFkServer(fkServer);
     model.setModel(processador.getNome());
     model.setMaxUse(processador.getFrequencia() * .000000001);
     model.setSerial(processador.getId());
+    model.setQtdNucles(processador.getNumeroCpusLogicas());
     return model;
   }
- 
 }
