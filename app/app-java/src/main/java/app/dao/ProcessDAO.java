@@ -1,6 +1,5 @@
 package app.dao;
 
-import app.controller.ProcessController;
 import app.model.ProcessModel;
 import java.util.List;
 import java.util.Map;
@@ -53,14 +52,4 @@ public class ProcessDAO extends Dao {
     return (int) queryForList.get(0).get("id");
   }
   
-  public static void main(String[] args) {
-    
-    ProcessDAO dao = new ProcessDAO();
-    ProcessController controller = new ProcessController();
-    
-    controller.getProcessPerMemo()
-            .forEach(p->{
-              System.out.println(dao.saveProcess(p));
-            });
-  }
 }

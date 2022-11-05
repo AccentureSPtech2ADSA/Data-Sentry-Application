@@ -1,10 +1,26 @@
 package classes.app.gui;
 
+import app.controller.ProcessController;
+import app.controller.ServerController;
+import app.controller.component.DiscoControllerStrategy;
+import app.controller.component.ProcessadorControllerStrategy;
+import app.controller.component.RamControllerStrategy;
+import app.dao.ComponentDAO;
+import app.dao.LogProcessComponentDAO;
+import app.dao.ProcessDAO;
+import app.dao.ServerDAO;
 import app.dao.UserDAO;
 import app.database.Ambiente;
 import app.database.Database;
+import app.model.ComponentModel;
+import app.model.LogComponentProcess;
+import app.model.ProcessModel;
+import app.model.ServerModel;
 import app.model.UserModel;
 import classes.app.cli.LoginCli;
+import classes.app.cli.PostLoginCli;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
@@ -253,29 +269,79 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
   public static void main(String args[]) {
     String ambient = System.getenv().getOrDefault("AMBIENT_DATASENTRY", "PROD");
-    String isGraphical = System.getenv().getOrDefault("GUI_DATASENTRY", "GUI");
+    String isGraphical = System.getenv().getOrDefault("GUI_DATASENTRY", "CLI");
     Database.ambiente = ambient.equalsIgnoreCase("PROD")
             ? Ambiente.AZURE_CLOUD
             : Ambiente.DOCKER_LOCAL;
-    System.out.println(ambient);
-    System.out.println(isGraphical);
     if (isGraphical.equals("CLI")) {
       LoginCli cli = new LoginCli();
-      if(cli.hasConsole()){
-        if(cli.welcome()){
-           cli.readEmail();
-           cli.readPassword();
-           
-           UserDAO userDao = new UserDAO();
-           userDao.login(cli.getEmail(), cli.getPass());
+      if (cli.hasConsole()) {
+        if (cli.welcome()) {
+          cli.readEmail();
+          cli.readPassword();
+
+          UserDAO userDao = new UserDAO();
+          UserModel user = userDao.login(cli.getEmail(), cli.getPass());
+          if (user.getFkHospital() > 0) {
+            // segue o processo
+            postLoginCli(user);
+          }
         }
-      }else System.out.println("Não tem console");
-    }else if(isGraphical.equals("GUI")){
+      } else {
+        System.out.println("Não tem console");
+      }
+    } else if (isGraphical.equals("GUI")) {
       java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
           new InterfaceLogin().setVisible(true);
         }
       });
+    }
+  }
+
+  private static void postLoginCli(UserModel user) {
+    // set server;
+    try {
+      ServerDAO serverDAO = new ServerDAO();
+      ServerModel server = serverDAO.save(new ServerController().getServer());
+      System.out.println("Serial server: " + server.getSerialServer());
+
+      ComponentDAO componentDAO = new ComponentDAO();
+      ComponentModel ram = componentDAO.save(new RamControllerStrategy().getComponent(server.getSerialServer()));
+      ComponentModel cpu = componentDAO.save(new ProcessadorControllerStrategy().getComponent(server.getSerialServer()));
+      List<ComponentModel> discos = new ArrayList<>();
+      new DiscoControllerStrategy().getComponents(server.getSerialServer())
+              .forEach(d -> {
+                try {
+                  ComponentModel save = componentDAO.save(d);
+                  discos.add(save);
+                } catch (Exception e) {
+                  System.out.println("Houve algo de errado ao inserir disco.");
+                }
+              });
+
+      // get processos
+      ProcessDAO processDao = new ProcessDAO();
+      LogProcessComponentDAO logDao = new LogProcessComponentDAO();
+      new ProcessController()
+              .getProcessPerMemo()
+              .forEach(process -> {
+                ProcessModel saveProcess = processDao.saveProcess(process);
+                // get logs too
+                System.out.println(saveProcess);
+                LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
+                LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
+                LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
+                
+                logDao.save(logCpu);
+                logDao.save(logDisco);
+                logDao.save(logRam);
+
+              });
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Houve algo de errado.");
     }
   }
 

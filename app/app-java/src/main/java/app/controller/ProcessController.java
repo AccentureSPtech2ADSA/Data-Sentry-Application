@@ -19,7 +19,7 @@ public class ProcessController extends ControllerLooca {
             .distinct()
             .sorted(
                     Comparator
-                            .comparingDouble(Processo::getUsoMemoria)
+                            .comparingDouble(Processo::getUsoCpu)
                             .reversed())
             .limit(20)
             .collect(Collectors.toList());

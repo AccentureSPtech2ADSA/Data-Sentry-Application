@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class UserDAO extends Dao {
 
-  public void login(String email, String senha) {
+  public UserModel login(String email, String senha) {
     UserModel user = new UserModel();
     String query = "EXEC sp_loginUser ?, ?";
     List<Map<String, Object>> queryForList = conn.queryForList(query, email, senha);
@@ -27,11 +27,12 @@ public class UserDAO extends Dao {
                 user.setFkHospital(fkHospital);
                 user.setEmail(email);
 
-                UserController.USER = user;
               });
     } else {
       System.out.println("Email e senha incorretos.");
     }
+    
+    return user;
   }
 
 }

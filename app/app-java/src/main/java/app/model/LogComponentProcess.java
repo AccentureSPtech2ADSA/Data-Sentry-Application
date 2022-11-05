@@ -1,44 +1,36 @@
 package app.model;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class LogComponentProcess {
 
   private ProcessModel process;
-  private ComponentTypeEnum component;
+  private ComponentModel component;
   private Date date;
   private Double usageComponent;
 
-  public LogComponentProcess(ProcessModel process) {
-    this.process = process;
-  }
-  private LogComponentProcess(ComponentTypeEnum component) {
-    this.component = component;
-    Double usage = 0.0;
-    switch (component) {
-      case CPU:
-        usage = process.getUseCpu();
-        break;
-      case RAM:
-        usage = process.getUseMem();
-        break;
-      case DISCO:
-        usage = process.getUseBytesDisk() * .000000001;
-        break;
-      default:
-        System.out.println("Invalided Component");
-    }
+ 
 
+  public LogComponentProcess(ComponentModel component, ProcessModel process) {
+    this.component = component;
+    this.process = process;
+    Double usage = 0.0;
+    if (component.getComponentType() == ComponentTypeEnum.CPU) {
+      usage = process.getUseCpu();
+    } else if (component.getComponentType() == ComponentTypeEnum.RAM) {
+      usage = process.getUseMem();
+    } else if (component.getComponentType() == ComponentTypeEnum.DISCO) {
+      usage = process.getUseBytesDisk() * .000000001;
+    }
     this.usageComponent = usage;
   }
 
-  public ComponentTypeEnum getComponent() {
+  public ComponentModel getComponent() {
     return component;
   }
 
-  public void setComponent(ComponentTypeEnum component) {
+  public void setComponent(ComponentModel component) {
     this.component = component;
   }
 
@@ -67,23 +59,26 @@ public class LogComponentProcess {
   }
 
   public List<LogComponentProcess> getLogsPerProcess() {
-    return Arrays.asList(
-            new LogComponentProcess(ComponentTypeEnum.CPU),
-            new LogComponentProcess(ComponentTypeEnum.RAM),
-            new LogComponentProcess(ComponentTypeEnum.DISCO)
+    return List.of(
+            new LogComponentProcess(this.component, this.process),
+            new LogComponentProcess(this.component, this.process),
+            new LogComponentProcess(this.component, this.process)
     );
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("LogComponentProcess{");
-    sb.append("process=").append(process);
-    sb.append(", component=").append(component);
-    sb.append(", usageComponent=").append(usageComponent);
-    sb.append('}');
+    sb.append("LogComponentProcess = [");
+    sb.append("\nprocess: ").append(process);
+    sb.append("\ncomponent: ").append(component);
+    sb.append("\nusageComponent: ").append(usageComponent);
+    sb.append(']').append(",\n");
+    sb.append("-".repeat(40));
     return sb.toString();
   }
-  
-  
+
+  public Double getFormatedUsage(){
+    return Double.valueOf(String.format("%.3f",getUsageComponent()).replaceAll(",", "."));
+  }
 }
