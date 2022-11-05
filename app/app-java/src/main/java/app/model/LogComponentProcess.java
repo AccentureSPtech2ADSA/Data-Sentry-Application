@@ -16,10 +16,13 @@ public class LogComponentProcess {
     this.component = component;
     this.process = process;
     Double usage = 0.0;
-    if (component.getComponentType() == ComponentTypeEnum.CPU) {
-      usage = process.getUseCpu();
+    if (component.getComponentType() == ComponentTypeEnum.CPU && component instanceof CpuComponentModel) {
+      CpuComponentModel cpu = (CpuComponentModel) component;
+      Double percent = cpu.getMaxUseFormated() * cpu.getQtdNucles() * (process.getUseCpu() / 100);
+      usage = percent / 100 * cpu.getMaxUseFormated();
     } else if (component.getComponentType() == ComponentTypeEnum.RAM) {
-      usage = process.getUseMem();
+      Double percent = process.getUseMem();
+      usage = component.getMaxUseFormated() * (percent / 100);
     } else if (component.getComponentType() == ComponentTypeEnum.DISCO) {
       usage = process.getUseBytesDisk() * .000000001;
     }

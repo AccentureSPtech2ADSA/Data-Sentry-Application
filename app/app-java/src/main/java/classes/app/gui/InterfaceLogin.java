@@ -323,20 +323,20 @@ public class InterfaceLogin extends javax.swing.JFrame {
       // get processos
       ProcessDAO processDao = new ProcessDAO();
       LogProcessComponentDAO logDao = new LogProcessComponentDAO();
+      System.out.println("Monitorando...");
       new ProcessController()
               .getProcessPerMemo()
               .forEach(process -> {
                 ProcessModel saveProcess = processDao.saveProcess(process);
                 // get logs too
-                System.out.println(saveProcess);
                 LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
                 LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
                 LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
-                
+
+
                 logDao.save(logCpu);
                 logDao.save(logDisco);
                 logDao.save(logRam);
-
               });
 
     } catch (Exception e) {
