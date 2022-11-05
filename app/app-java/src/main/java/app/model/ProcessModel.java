@@ -67,7 +67,7 @@ public class ProcessModel {
     sb.append("\nuseCpu : ").append(useCpu);
     sb.append("\nuseBytesDisk : ").append(useBytesDisk);
     sb.append("\npid : ").append(pid);
-    sb.append("\n], \n");
+    sb.append("\n],");
     return sb.toString();
   }
 

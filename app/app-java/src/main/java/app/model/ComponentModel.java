@@ -1,7 +1,7 @@
 package app.model;
 
 public class ComponentModel {
-
+  private Integer idComponent;
   private String serial;
   private String model;
   private String brand;
@@ -12,6 +12,16 @@ public class ComponentModel {
   public Double getMaxUseFormated(){
      return Double.valueOf(String.format("%.2f", this.maxUse).replace(",","."));
   }
+
+  public Integer getIdComponent() {
+    return idComponent;
+  }
+
+  public void setIdComponent(Integer idComponent) {
+    this.idComponent = idComponent;
+  }
+  
+  
   public String getFkServer() {
     return fkServer;
   }

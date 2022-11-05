@@ -1,8 +1,12 @@
 package app.dao;
 
+import app.controller.component.DiscoControllerStrategy;
+import app.controller.component.ProcessadorControllerStrategy;
+import app.controller.component.RamControllerStrategy;
 import app.model.ComponentModel;
 import java.util.List;
 import java.util.Map;
+
 public class ComponentDAO extends Dao {
 
   private static final String SERIAL = "serial";
@@ -12,15 +16,16 @@ public class ComponentDAO extends Dao {
   private static final String FKSERVER = "fkServer";
   private static final String FKTYPE = "fkComponentType";
 
-  public ComponentDAO(){
+  public ComponentDAO() {
     ComponentTypeDAO types = new ComponentTypeDAO();
     types.saveComponentTypes();
   }
-  
-  public Integer save(ComponentModel component) {
-    if(componentExists(component.getSerial())){
-      System.out.println(component.getComponentType().getDescricao()+" com serial: "+ component.getSerial() + " ja foi inserido.");
-      return -1;
+
+  public ComponentModel save(ComponentModel component) throws Exception {
+    if (componentExists(component.getSerial())) {
+      System.out.println(component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido.");
+      component.setIdComponent(getProcessIdPerSerial(component.getSerial()));
+      return component;
     }
     String querySave = String.format("INSERT INTO ComponentServer"
             + "(%s, %s, %s, %s, %s, %s) VALUES (?,?,?,?,?,?)",
@@ -29,7 +34,7 @@ public class ComponentDAO extends Dao {
 
     System.out.println(String.format("Inserindo %s: ", component.getComponentType().getDescricao()));
     System.out.println(component);
-    return conn.update(
+    Integer res = conn.update(
             querySave,
             component.getSerial(),
             component.getModel(),
@@ -38,6 +43,29 @@ public class ComponentDAO extends Dao {
             component.getFkServer(),
             component.getComponentType().getIdTypeComponent()
     );
+    if (res > 0) {
+      component.setIdComponent(getLastInsertedProcessId());
+      return component;
+    }
+    throw new Exception("Houve algo errado.");
+  }
+
+  private Integer getLastInsertedProcessId() {
+    String query = String.format("SELECT TOP 1 _idComponentServer id FROM "
+            + "ComponentServer ORDER BY _idComponentServer DESC");
+
+    List<Map<String, Object>> queryForList = conn.queryForList(query);
+
+    return (int) queryForList.get(0).get("id");
+  }
+
+  private Integer getProcessIdPerSerial(String serial) {
+    String query = String.format("SELECT TOP 1 _idComponentServer id FROM "
+            + "ComponentServer WHERE serial = ?");
+
+    List<Map<String, Object>> queryForList = conn.queryForList(query, serial);
+
+    return (int) queryForList.get(0).get("id");
   }
 
   private Boolean componentExists(String serial) {
@@ -45,8 +73,7 @@ public class ComponentDAO extends Dao {
             + "ComponentServer WHERE serial = ?");
 
     List<Map<String, Object>> queryForList = conn.queryForList(query, serial);
-    
-    return queryForList.size() > 0;
-  }
 
+    return !queryForList.isEmpty();
+  }
 }
