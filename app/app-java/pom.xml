@@ -23,7 +23,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>classes.app.InterfaceLogin</mainClass>
+              <mainClass>classes.app.gui.InterfaceLogin</mainClass>
             </manifest>
           </archive>
         </configuration>

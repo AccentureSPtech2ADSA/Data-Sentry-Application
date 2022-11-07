@@ -11,6 +11,7 @@ public class ProcessDAO extends Dao {
       String query = "INSERT INTO Process (name) "
               + "VALUES (?)";
 
+      System.out.println(model);
       System.out.println(String.format("Inserindo processo: ", model.getName()));
 
       Integer res = conn.update(query, model.getName());

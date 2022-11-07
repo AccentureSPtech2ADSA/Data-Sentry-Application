@@ -268,12 +268,8 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
   public static void main(String args[]) {
-    String ambient = System.getenv().getOrDefault("AMBIENT_DATASENTRY", "PROD");
-    String isGraphical = System.getenv().getOrDefault("GUI_DATASENTRY", "CLI");
-    Database.ambiente = ambient.equalsIgnoreCase("PROD")
-            ? Ambiente.AZURE_CLOUD
-            : Ambiente.DOCKER_LOCAL;
-    if (isGraphical.equals("CLI")) {
+    String isGraphical = System.getenv().getOrDefault("HAS_INTERFACE", "NO");
+    if (isGraphical.equals("NO")) {
       LoginCli cli = new LoginCli();
       if (cli.hasConsole()) {
         if (cli.welcome()) {
@@ -290,7 +286,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
       } else {
         System.out.println("Não tem console");
       }
-    } else if (isGraphical.equals("GUI")) {
+    } else if (isGraphical.equals("YES")) {
       java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
           new InterfaceLogin().setVisible(true);
