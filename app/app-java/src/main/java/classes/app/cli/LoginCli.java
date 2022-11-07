@@ -11,7 +11,6 @@ public class LoginCli extends Cli{
   public void readPassword(){
     System.out.println("Digite sua senha");
     pass = getConsole().readPass();
-    System.out.println("Pass: "+ pass);
   }
 
   public String getEmail() {
