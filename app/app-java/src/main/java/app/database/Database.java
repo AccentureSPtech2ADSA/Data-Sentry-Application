@@ -1,34 +1,23 @@
 package app.database;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Database {
 
-  private static final String USER = "datasentry";
-  private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-  private static final String PASS = "#Gfgrupo1";
-    private static final String DB_URL = "jdbc:sqlserver://;serverName=datasentry.database.windows.net;encrypt=true;trustServerCertificate=true;databaseName=datasentry";
-
   private static JdbcTemplate conn = null;
-
+  public static Ambiente ambiente = Ambiente.AZURE_CLOUD;
+  
   public static JdbcTemplate getConn() {
-
+    
     if (conn == null) {
       try {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(DRIVER);
-        dataSource.setUrl(DB_URL);
-        dataSource.setUsername(USER);
-        dataSource.setPassword(PASS);
-
-        conn = new JdbcTemplate(dataSource);
-
+        conn = new JdbcTemplate(ambiente.getDatasource());
       } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println(e.getMessage());
+        System.out.println("Houve algum erro ao conectar no ambiente " + ambiente);
       }
     }
     return conn;
   }
- 
+
 }
