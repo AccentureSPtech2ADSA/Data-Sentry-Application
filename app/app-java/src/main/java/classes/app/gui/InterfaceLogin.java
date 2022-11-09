@@ -24,12 +24,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
-
-  public InterfaceLogin() {
-    initComponents();
-  }
-
-  @SuppressWarnings("unchecked")
+    
+    public InterfaceLogin() {
+        initComponents();
+    }
+    
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -100,7 +100,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha:");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -243,7 +243,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
 
-      UserDAO dao = new UserDAO();
+        UserDAO dao = new UserDAO();
       String emailLogin = email.getText();
       String senhaLogin = String.valueOf(senha.getPassword());
       UserModel user = new UserModel();
@@ -264,10 +264,10 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-      // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
-  public static void main(String args[]) {
+    public static void main(String args[]) {
     String isGraphical = System.getenv().getOrDefault("HAS_INTERFACE", "NO");
     if (isGraphical.equals("NO")) {
       LoginCli cli = new LoginCli();
@@ -278,7 +278,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
 
           UserDAO userDao = new UserDAO();
           UserModel user = userDao.login(cli.getEmail(), cli.getPass());
-          if (user.getFkHospital() > 0) {
+          if (user.getFkHospital() != null && user.getFkHospital() > 0) {
             // segue o processo
             postLoginCli(user);
           }
@@ -295,7 +295,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }
   }
 
-  private static void postLoginCli(UserModel user) {
+    private static void postLoginCli(UserModel user) {
     // set server;
     try {
       ServerDAO serverDAO = new ServerDAO();

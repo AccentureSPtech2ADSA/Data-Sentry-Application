@@ -94,11 +94,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace pref="122" max="32767" attributes="0"/>
-=======
                       <EmptySpace pref="156" max="32767" attributes="0"/>
->>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="buttonParaIrAoSite" alignment="2" min="-2" pref="179" max="-2" attributes="0"/>
                           <Component id="labelAcesseADashboard" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -107,32 +103,14 @@
                           <Component id="labelTexto1" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
-<<<<<<< HEAD
-                      <EmptySpace pref="121" max="32767" attributes="0"/>
-=======
-<<<<<<<< HEAD:app/app-java/src/main/java/classes/app/InterfacePosLogin.form
                       <EmptySpace pref="156" max="32767" attributes="0"/>
-========
-                      <EmptySpace min="279" pref="285" max="32767" attributes="0"/>
->>>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128:app/app-java/src/main/java/classes/app/InterfaceLoading.form
->>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-=======
-<<<<<<<< HEAD:app/app-java/src/main/java/classes/app/InterfacePosLogin.form
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-========
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="94" max="32767" attributes="0"/>
->>>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128:app/app-java/src/main/java/classes/app/InterfaceLoading.form
->>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="labelTexto1" min="-2" max="-2" attributes="0"/>
@@ -144,11 +122,7 @@
                       <Component id="labelAcesseADashboard" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="buttonParaIrAoSite" min="-2" pref="43" max="-2" attributes="0"/>
-<<<<<<< HEAD
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
-=======
                       <EmptySpace pref="45" max="32767" attributes="0"/>
->>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
                   </Group>
               </Group>
             </DimensionLayout>
@@ -216,11 +190,7 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-<<<<<<< HEAD
-                  <Image iconType="3" name="/imagens/logo.png"/>
-=======
                   <Image iconType="3" name="/logo.png"/>
->>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
                 </Property>
               </Properties>
             </Component>
@@ -301,11 +271,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-<<<<<<< HEAD
-                  <Image iconType="3" name="/imagens/confiar.png"/>
-=======
                   <Image iconType="3" name="/confiar.png"/>
->>>>>>> 3e1a52aa9932163080a86e3e51c98577e5239128
                 </Property>
               </Properties>
             </Component>
