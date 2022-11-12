@@ -268,8 +268,8 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
   public static void main(String args[]) {
-    String isGraphical = System.getenv().getOrDefault("HAS_INTERFACE", "NO");
-    if (isGraphical.equals("NO")) {
+    String isGraphical = System.getenv().getOrDefault("XDG_CURRENT_DESKTOP", "");
+    if (isGraphical == null || isGraphical.equals("") || isGraphical.trim().length() == 0) {
       LoginCli cli = new LoginCli();
       if (cli.hasConsole()) {
         if (cli.welcome()) {
@@ -286,7 +286,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
       } else {
         System.out.println("Não tem console");
       }
-    } else if (isGraphical.equals("YES")) {
+    } else {
       java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
           new InterfaceLogin().setVisible(true);
