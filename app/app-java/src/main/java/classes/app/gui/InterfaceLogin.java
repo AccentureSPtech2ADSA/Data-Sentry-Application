@@ -100,7 +100,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha:");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -264,12 +264,12 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
-    public static void main(String args[]) {
-    String isGraphical = System.getenv().getOrDefault("HAS_INTERFACE", "NO");
-    if (isGraphical.equals("NO")) {
+  public static void main(String args[]) {
+    String isGraphical = System.getenv().getOrDefault("XDG_CURRENT_DESKTOP", "");
+    if (isGraphical == null || isGraphical.equals("") || isGraphical.trim().length() == 0) {
       LoginCli cli = new LoginCli();
       if (cli.hasConsole()) {
         if (cli.welcome()) {
@@ -286,7 +286,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
       } else {
         System.out.println("Não tem console");
       }
-    } else if (isGraphical.equals("YES")) {
+    } else {
       java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
           new InterfaceLogin().setVisible(true);
