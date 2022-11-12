@@ -33,7 +33,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kGradientPanel1 = new keeptoo.KGradientPanel();
+        fundoGradienteBlocoDeLogin = new keeptoo.KGradientPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
@@ -41,7 +41,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        kGradientPanel2 = new keeptoo.KGradientPanel();
+        fundoGradienteBlocoMensagemEquipe = new keeptoo.KGradientPanel();
         kGradientPanel3 = new keeptoo.KGradientPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -54,8 +54,8 @@ public class InterfaceLogin extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1100, 550));
         setResizable(false);
 
-        kGradientPanel1.setkEndColor(new java.awt.Color(0, 98, 97));
-        kGradientPanel1.setkStartColor(new java.awt.Color(0, 255, 253));
+        fundoGradienteBlocoDeLogin.setkEndColor(new java.awt.Color(0, 143, 140));
+        fundoGradienteBlocoDeLogin.setkStartColor(new java.awt.Color(41, 198, 196));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -141,28 +141,28 @@ public class InterfaceLogin extends javax.swing.JFrame {
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
-        kGradientPanel1.setLayout(kGradientPanel1Layout);
-        kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout fundoGradienteBlocoDeLoginLayout = new javax.swing.GroupLayout(fundoGradienteBlocoDeLogin);
+        fundoGradienteBlocoDeLogin.setLayout(fundoGradienteBlocoDeLoginLayout);
+        fundoGradienteBlocoDeLoginLayout.setHorizontalGroup(
+            fundoGradienteBlocoDeLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fundoGradienteBlocoDeLoginLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
-        kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+        fundoGradienteBlocoDeLoginLayout.setVerticalGroup(
+            fundoGradienteBlocoDeLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fundoGradienteBlocoDeLoginLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
 
-        kGradientPanel2.setkEndColor(new java.awt.Color(204, 204, 204));
-        kGradientPanel2.setkStartColor(new java.awt.Color(255, 255, 255));
+        fundoGradienteBlocoMensagemEquipe.setkEndColor(new java.awt.Color(237, 237, 237));
+        fundoGradienteBlocoMensagemEquipe.setkStartColor(new java.awt.Color(215, 215, 215));
 
-        kGradientPanel3.setkEndColor(new java.awt.Color(25, 159, 158));
-        kGradientPanel3.setkStartColor(new java.awt.Color(64, 234, 230));
+        kGradientPanel3.setkEndColor(new java.awt.Color(0, 143, 140));
+        kGradientPanel3.setkStartColor(new java.awt.Color(41, 198, 196));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -205,18 +205,18 @@ public class InterfaceLogin extends javax.swing.JFrame {
                 .addGap(55, 55, 55))
         );
 
-        javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
-        kGradientPanel2.setLayout(kGradientPanel2Layout);
-        kGradientPanel2Layout.setHorizontalGroup(
-            kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout fundoGradienteBlocoMensagemEquipeLayout = new javax.swing.GroupLayout(fundoGradienteBlocoMensagemEquipe);
+        fundoGradienteBlocoMensagemEquipe.setLayout(fundoGradienteBlocoMensagemEquipeLayout);
+        fundoGradienteBlocoMensagemEquipeLayout.setHorizontalGroup(
+            fundoGradienteBlocoMensagemEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fundoGradienteBlocoMensagemEquipeLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
-        kGradientPanel2Layout.setVerticalGroup(
-            kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel2Layout.createSequentialGroup()
+        fundoGradienteBlocoMensagemEquipeLayout.setVerticalGroup(
+            fundoGradienteBlocoMensagemEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fundoGradienteBlocoMensagemEquipeLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116))
@@ -227,15 +227,15 @@ public class InterfaceLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fundoGradienteBlocoDeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fundoGradienteBlocoMensagemEquipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fundoGradienteBlocoDeLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fundoGradienteBlocoMensagemEquipe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -343,6 +343,8 @@ public class InterfaceLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogin;
     private javax.swing.JTextField email;
+    private keeptoo.KGradientPanel fundoGradienteBlocoDeLogin;
+    private keeptoo.KGradientPanel fundoGradienteBlocoMensagemEquipe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -351,8 +353,6 @@ public class InterfaceLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private keeptoo.KGradientPanel kGradientPanel1;
-    private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
     private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables

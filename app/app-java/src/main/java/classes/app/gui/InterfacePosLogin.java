@@ -48,6 +48,7 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         Timer timerCancel = new Timer();
 
         labelTextoVariavel.setVisible(false);
+        labelGifCarregando.setVisible(false);
         labelTexto1.setVisible(true);
         labelTexto2.setVisible(true);
         labelAcesseADashboard.setVisible(true);
@@ -79,12 +80,13 @@ public class InterfacePosLogin extends javax.swing.JFrame {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
+        labelGifCarregando = new javax.swing.JLabel();
+        labelTextoVariavel = new javax.swing.JLabel();
         labelAcesseADashboard = new javax.swing.JLabel();
         buttonParaIrAoSite = new javax.swing.JButton();
-        labelTexto2 = new javax.swing.JLabel();
-        labelTexto1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        labelTextoVariavel = new javax.swing.JLabel();
+        labelTexto1 = new javax.swing.JLabel();
+        labelTexto2 = new javax.swing.JLabel();
         kGradientPanel3 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -102,6 +104,20 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         kGradientPanel2.setkEndColor(new java.awt.Color(236, 236, 236));
         kGradientPanel2.setkStartColor(new java.awt.Color(255, 255, 255));
         kGradientPanel2.setPreferredSize(new java.awt.Dimension(1060, 481));
+
+        labelGifCarregando.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/carregando.gif"))); // NOI18N
+        labelGifCarregando.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                labelGifCarregandoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                labelGifCarregandoFocusLost(evt);
+            }
+        });
+
+        labelTextoVariavel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelTextoVariavel.setForeground(new java.awt.Color(0, 0, 0));
+        labelTextoVariavel.setText("Pegando os dados do Servidor...");
 
         labelAcesseADashboard.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelAcesseADashboard.setForeground(new java.awt.Color(0, 0, 0));
@@ -122,19 +138,15 @@ public class InterfacePosLogin extends javax.swing.JFrame {
             }
         });
 
-        labelTexto2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelTexto2.setForeground(new java.awt.Color(0, 0, 0));
-        labelTexto2.setText("para sua dashboard");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         labelTexto1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTexto1.setForeground(new java.awt.Color(0, 0, 0));
         labelTexto1.setText("Seus dados estão sendo enviados");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
-
-        labelTextoVariavel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelTextoVariavel.setForeground(new java.awt.Color(0, 0, 0));
-        labelTextoVariavel.setText("Pegando os dados do Servidor...");
+        labelTexto2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelTexto2.setForeground(new java.awt.Color(0, 0, 0));
+        labelTexto2.setText("para sua dashboard");
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -143,30 +155,34 @@ public class InterfacePosLogin extends javax.swing.JFrame {
             .addGroup(kGradientPanel2Layout.createSequentialGroup()
                 .addContainerGap(156, Short.MAX_VALUE)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(buttonParaIrAoSite, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelAcesseADashboard)
                     .addComponent(labelTextoVariavel)
-                    .addComponent(labelTexto2)
+                    .addComponent(jLabel4)
+                    .addComponent(labelGifCarregando)
+                    .addComponent(labelAcesseADashboard)
+                    .addComponent(buttonParaIrAoSite, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelTexto1)
-                    .addComponent(jLabel4))
+                    .addComponent(labelTexto2))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         kGradientPanel2Layout.setVerticalGroup(
             kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel4)
-                .addGap(66, 66, 66)
-                .addComponent(labelTexto1)
-                .addGap(0, 0, 0)
-                .addComponent(labelTexto2)
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
                 .addComponent(labelTextoVariavel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelGifCarregando, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(kGradientPanel2Layout.createSequentialGroup()
+                        .addComponent(labelTexto1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelTexto2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(labelAcesseADashboard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonParaIrAoSite, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
 
         kGradientPanel3.setkEndColor(new java.awt.Color(35, 175, 174));
@@ -176,8 +192,9 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Obrigado por confiar na");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Data Sentry!");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/confiar.png"))); // NOI18N
@@ -217,16 +234,16 @@ public class InterfacePosLogin extends javax.swing.JFrame {
                 .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(36, 36, 36)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
-                    .addComponent(kGradientPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(kGradientPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,6 +263,14 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     private void buttonParaIrAoSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonParaIrAoSiteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonParaIrAoSiteActionPerformed
+
+    private void labelGifCarregandoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelGifCarregandoFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_labelGifCarregandoFocusGained
+
+    private void labelGifCarregandoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelGifCarregandoFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_labelGifCarregandoFocusLost
 
     /**
      * @param args the command line arguments
@@ -295,6 +320,7 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
     private javax.swing.JLabel labelAcesseADashboard;
+    private javax.swing.JLabel labelGifCarregando;
     private javax.swing.JLabel labelTexto1;
     private javax.swing.JLabel labelTexto2;
     private javax.swing.JLabel labelTextoVariavel;
