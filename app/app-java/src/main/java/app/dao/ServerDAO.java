@@ -40,14 +40,5 @@ public class ServerDAO extends Dao{
 
     return (int) queryForList.get(0).get("id");
   }
-  public static void main(String[] args) {
-    
-    ServerDAO dao =  new ServerDAO();
-    ServerController server = new ServerController();
-    try {
-      dao.save(server.getServer());
-    } catch (IOException | ClassNotFoundException e) {
-      System.out.println("Impossivel cadastrar servidor.");
-    }
-  }
+  
 }

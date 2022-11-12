@@ -32,28 +32,28 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="kGradientPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="fundoGradienteBlocoDeLogin" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="kGradientPanel2" max="32767" attributes="0"/>
+              <Component id="fundoGradienteBlocoMensagemEquipe" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="kGradientPanel1" max="32767" attributes="0"/>
-          <Component id="kGradientPanel2" alignment="1" max="32767" attributes="0"/>
+          <Component id="fundoGradienteBlocoDeLogin" max="32767" attributes="0"/>
+          <Component id="fundoGradienteBlocoMensagemEquipe" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="keeptoo.KGradientPanel" name="kGradientPanel1">
+    <Container class="keeptoo.KGradientPanel" name="fundoGradienteBlocoDeLogin">
       <Properties>
         <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="61" green="62" red="0" type="rgb"/>
+          <Color blue="8c" green="8f" red="0" type="rgb"/>
         </Property>
         <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fd" green="ff" red="0" type="rgb"/>
+          <Color blue="c4" green="c6" red="29" type="rgb"/>
         </Property>
       </Properties>
 
@@ -244,13 +244,13 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="keeptoo.KGradientPanel" name="kGradientPanel2">
+    <Container class="keeptoo.KGradientPanel" name="fundoGradienteBlocoMensagemEquipe">
       <Properties>
         <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+          <Color blue="ed" green="ed" red="ed" type="rgb"/>
         </Property>
         <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="d7" green="d7" red="d7" type="rgb"/>
         </Property>
       </Properties>
 
@@ -278,10 +278,10 @@
         <Container class="keeptoo.KGradientPanel" name="kGradientPanel3">
           <Properties>
             <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9e" green="9f" red="19" type="rgb"/>
+              <Color blue="8c" green="8f" red="0" type="rgb"/>
             </Property>
             <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="ea" red="40" type="rgb"/>
+              <Color blue="c4" green="c6" red="29" type="rgb"/>
             </Property>
           </Properties>
 
