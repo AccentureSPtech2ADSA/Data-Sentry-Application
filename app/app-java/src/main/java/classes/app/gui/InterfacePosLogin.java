@@ -1,79 +1,161 @@
 package classes.app.gui;
 
+import app.controller.ProcessController;
+import app.controller.ServerController;
+import app.controller.component.DiscoControllerStrategy;
+import app.controller.component.ProcessadorControllerStrategy;
+import app.controller.component.RamControllerStrategy;
+import app.dao.ComponentDAO;
+import app.dao.LogProcessComponentDAO;
+import app.dao.ProcessDAO;
+import app.dao.ServerDAO;
+import app.model.ComponentModel;
+import app.model.LogComponentProcess;
+import app.model.ProcessModel;
+import app.model.ServerModel;
+import app.model.UserModel;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InterfacePosLogin extends javax.swing.JFrame {
 
-<<<<<<< HEAD:app/app-java/src/main/java/classes/app/gui/InterfacePosLogin.java
-    public InterfacePosLogin() {
-=======
+  private ServerModel server;
+  private ComponentDAO componentDAO;
+  private ComponentModel ram;
+  private ComponentModel cpu;
+  private ComponentModel disco;
+
   public InterfacePosLogin() {
->>>>>>> 441e58918729c3875d14261730690f4b611bb7a1:app/app-java/src/main/java/classes/app/InterfacePosLogin.java
     initComponents();
     labelTexto1.setVisible(false);
     labelTexto2.setVisible(false);
     labelAcesseADashboard.setVisible(false);
     buttonParaIrAoSite.setVisible(false);
 
+    this.componentDAO = new ComponentDAO();
+
     Timer timer = new Timer();
     final long secondsToGetDatas = (1000 * 3);
+
+    TimerTask taskServer = new TimerTask() {
+      @Override
+      public void run() {
+        labelTextoVariavel.setText("Configurando o servidor...");
+        ServerDAO serverDAO = new ServerDAO();
+        try {
+          server = serverDAO.save(new ServerController().getServer());
+          System.out.println("Serial server: " + server.getSerialServer());
+        } catch (Exception e) {
+          e.printStackTrace();
+          labelTextoVariavel.setText("Houve algo errado em capturar dados do servidor...");
+        }
+      }
+    };
 
     TimerTask task1 = new TimerTask() {
       @Override
       public void run() {
-            // set server
-            // set chip
-            // set mem
-            // set disk
-
-          labelTextoVariavel.setText("Pegando os dados da CPU...");
-        
+        labelTextoVariavel.setText("Pegando dados da CPU...");
+        try {
+          cpu = componentDAO.save(new ProcessadorControllerStrategy().getComponent(server.getSerialServer()));
+        } catch (Exception ex) {
+          ex.printStackTrace();
+          labelTextoVariavel.setText("Houve algo errado em capturar dados do CPU...");
+        }
       }
     };
 
     TimerTask task2 = new TimerTask() {
       @Override
       public void run() {
-        labelTextoVariavel.setText("Pegando os dados da memória ram...");
+        labelTextoVariavel.setText("Salvando Memória RAM...");
+
+        try {
+          ram = componentDAO.save(new RamControllerStrategy().getComponent(server.getSerialServer()));
+        } catch (Exception ex) {
+          ex.printStackTrace();
+          labelTextoVariavel.setText("Houve algo errado em capturar dados da RAM...");
+        }
       }
     };
 
     TimerTask task3 = new TimerTask() {
       @Override
       public void run() {
-        labelTextoVariavel.setText("Pegando os dados do disco...");
+        try {
+          labelTextoVariavel.setText("Capturando dados dos discos...");
+          List<ComponentModel> discos = new ArrayList<>();
+          new DiscoControllerStrategy().getComponents(server.getSerialServer())
+                  .forEach(d -> {
+                    try {
+                      ComponentModel save = componentDAO.save(d);
+                      discos.add(save);
+                    } catch (Exception e) {
+                      System.out.println("Houve algo de errado ao inserir disco.");
+                    }
+                  });
+          disco = discos.get(0);
+        } catch (Exception ex) {
+          ex.printStackTrace();
+          labelTextoVariavel.setText("Houve algo errado em capturar dados dos discos...");
+        }
+
       }
     };
 
     TimerTask taskFinal = new TimerTask() {
       @Override
       public void run() {
-        Timer timerCancel = new Timer();
 
         labelTextoVariavel.setVisible(false);
-<<<<<<< HEAD:app/app-java/src/main/java/classes/app/gui/InterfacePosLogin.java
         labelGifCarregando.setVisible(false);
-=======
->>>>>>> 441e58918729c3875d14261730690f4b611bb7a1:app/app-java/src/main/java/classes/app/InterfacePosLogin.java
         labelTexto1.setVisible(true);
         labelTexto2.setVisible(true);
         labelAcesseADashboard.setVisible(true);
         buttonParaIrAoSite.setVisible(true);
 
-        timerCancel.cancel();
-        timerCancel.purge();
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+          @Override
+          public void run() {
+            
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
+            String now = sdf.format(date);
+            
+            ProcessDAO processDao = new ProcessDAO();
+            LogProcessComponentDAO logDao = new LogProcessComponentDAO();
+            System.out.println("Monitorando: " + now);
+            new ProcessController()
+                    .getProcessPerMemo()
+                    .forEach(process -> {
+                      ProcessModel saveProcess = processDao.saveProcess(process);
+                      // get logs too
+                      LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
+                      LogComponentProcess logDisco = new LogComponentProcess(disco, saveProcess);
+                      LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
+
+                      
+                      logDao.save(logCpu, now);
+                      logDao.save(logDisco, now);
+                      logDao.save(logRam, now);
+                    });
+          }
+        }, 0, 1000 * 60);
       }
     };
 
-    timer.schedule(task1, secondsToGetDatas);
-    try {
-      Thread.sleep(4000);
-    } catch (Exception e) {
-    }
-    timer.schedule(task2, 6000);
-    timer.schedule(task3, 9000);
-    timer.schedule(taskFinal, 12000);
+    timer.schedule(taskServer, secondsToGetDatas);
+    timer.schedule(task1, secondsToGetDatas * 2);
+    timer.schedule(task2, secondsToGetDatas * 3);
+    timer.schedule(task3, secondsToGetDatas * 4);
+    timer.schedule(taskFinal, secondsToGetDatas * 5);
   }
 
   @SuppressWarnings("unchecked")
@@ -266,62 +348,52 @@ public class InterfacePosLogin extends javax.swing.JFrame {
       // TODO add your handling code here:
     }//GEN-LAST:event_buttonParaIrAoSiteActionPerformed
 
-<<<<<<< HEAD:app/app-java/src/main/java/classes/app/gui/InterfacePosLogin.java
     private void labelGifCarregandoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelGifCarregandoFocusGained
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_labelGifCarregandoFocusGained
 
     private void labelGifCarregandoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_labelGifCarregandoFocusLost
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_labelGifCarregandoFocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfacePosLogin().setVisible(true);
-            }
-        });
-    }
-=======
+  /**
+   * @param args the command line arguments
+   */
   public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+    try {
+      for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+          javax.swing.UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    } catch (ClassNotFoundException ex) {
+      java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+      java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+      java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+      java.util.logging.Logger.getLogger(InterfacePosLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
 
+    /* Create and display the form */
     java.awt.EventQueue.invokeLater(new Runnable() {
       public void run() {
         new InterfacePosLogin().setVisible(true);
       }
     });
   }
->>>>>>> 441e58918729c3875d14261730690f4b611bb7a1:app/app-java/src/main/java/classes/app/InterfacePosLogin.java
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonParaIrAoSite;
