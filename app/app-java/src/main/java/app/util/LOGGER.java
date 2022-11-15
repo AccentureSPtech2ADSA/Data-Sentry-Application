@@ -10,33 +10,88 @@ import java.io.IOException;
 
 public class LOGGER {
 
-  private static File fileInstalation = new File("file_instalation.txt");
-  private static File fileAlerts;
+//------------------------ Instances Files
+ 
+  private static File logComponents = new File("log_components.txt");
+  private static File logUsers = new File("log_users.txt");
 
-  public static void info(String info) {
+  
+//------------------------ Methods for a type Log & Insertion a type File
+//--- Append Information
+  public static void info(String info, String typeFile) {
     String append = getDate() + " - Info - " + info;
-    LOGGER.atualizarArquivoInstalacao(append);
+    
+    if (typeFile.equals("users")){
+        LOGGER.atualizarArquivoLogUsers(append);
+        
+    } else if (typeFile.equals("components")){
+        LOGGER.atualizarArquivoLogComponents(append); 
+        
+    } else {
+        System.out.println("Tipo do arquivo não específicado");
+    }
   }
 
-  public static void error(String error) {
+//--- Append Error
+  public static void error(String error, String typeFile) {
     String append = getDate() + " - Error - " + error;
-    LOGGER.atualizarArquivoInstalacao(append);
+    if (typeFile.equals("users")){
+        LOGGER.atualizarArquivoLogUsers(append);
+        
+    } else if (typeFile.equals("components")){
+        LOGGER.atualizarArquivoLogComponents(append); 
+        
+    } else {
+        System.out.println("Tipo do arquivo não específicado");
+    }
   }
 
-  public static void warning(String warning) {
+//--- Append Warning
+  public static void warning(String warning, String typeFile) {
     String append = getDate() + " - Warning - " + warning;
-    LOGGER.atualizarArquivoInstalacao(append);
+    if (typeFile.equals("users")){
+        LOGGER.atualizarArquivoLogUsers(append);
+        
+    } else if (typeFile.equals("components")){
+        LOGGER.atualizarArquivoLogComponents(append); 
+        
+    } else {
+        System.out.println("Tipo do arquivo não específicado");
+    }
   }
 
-  private static void atualizarArquivoInstalacao(String append) {
+//------------------- Logs of the Components (Insertion in file)
+  
+  private static void atualizarArquivoLogComponents(String append) {
     // escreve no arquivo
     try {
-      if (fileInstalation.exists() && !fileInstalation.isDirectory()) {
-        fileInstalation = new File("file_instalation.txt");
+      if (logComponents.exists() && !logComponents.isDirectory()) {
+        logComponents = new File("log_components.txt");
       }
-      System.out.println("Atualizando o arquivo");
+      System.out.println("Atualizando o arquivo de components");
 
-      FileWriter writer = new FileWriter(LOGGER.fileInstalation, true);
+      FileWriter writer = new FileWriter(LOGGER.logComponents, true);
+      BufferedWriter buff = new BufferedWriter(writer);
+      buff.write(append);
+
+      buff.close();
+      writer.close();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+
+  }
+//------------------- Logs of the Users (Insertion in file)
+  
+  private static void atualizarArquivoLogUsers(String append) {
+    // escreve no arquivo
+    try {
+      if (logUsers.exists() && !logUsers.isDirectory()) {
+        logUsers = new File("log_users.txt");
+      }
+      System.out.println("Atualizando o arquivo de users");
+
+      FileWriter writer = new FileWriter(LOGGER.logUsers, true);
       BufferedWriter buff = new BufferedWriter(writer);
       buff.write(append);
 
@@ -48,10 +103,16 @@ public class LOGGER {
 
   }
 
+  
+//-------------------- Get Date and Hour
+  
   public static String getDate() {
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Date date = new Date();
     return "\n" + dateFormat.format(date);
   }
+  
+  
+    
 
 }
