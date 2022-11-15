@@ -1,0 +1,25 @@
+
+14/11/2022 23:35:56 - Info - Inserindo servidor: 
+14/11/2022 23:35:57 - Error - Não foi possível inserir o tipo de componente
+14/11/2022 23:35:57 - Error - Não foi possível inserir o tipo de componente
+14/11/2022 23:35:57 - Error - Não foi possível inserir o tipo de componente
+14/11/2022 23:35:57 - Info - Inserindo RAM: 
+14/11/2022 23:35:58 - Info - Inserindo CPU: 
+14/11/2022 23:36:00 - Info - Inserindo DISCO: 
+14/11/2022 23:36:01 - Info - Inserindo DISCO: 
+14/11/2022 23:36:08 - Info - Inserindo processo: 
+14/11/2022 23:36:12 - Info - Inserindo processo: 
+14/11/2022 23:36:14 - Info - Inserindo processo: 
+14/11/2022 23:36:20 - Info - Inserindo processo: 
+14/11/2022 23:36:22 - Info - Inserindo processo: 
+14/11/2022 23:36:23 - Info - Inserindo processo: 
+14/11/2022 23:36:28 - Info - Inserindo processo: 
+14/11/2022 23:37:03 - Info - Inserindo processo: 
+14/11/2022 23:39:21 - Warning - Servidor com serial: To be filled by O.E.M. ja foi inserido.
+14/11/2022 23:39:21 - Error - Não foi possível inserir o tipo de componente
+14/11/2022 23:39:21 - Error - Não foi possível inserir o tipo de componente
+14/11/2022 23:39:22 - Error - Não foi possível inserir o tipo de componente
+14/11/2022 23:39:22 - Info - Inserindo RAM: 
+14/11/2022 23:39:23 - Info - CPU com serial: BFEBFBFF000306A9 ja foi inserido.
+14/11/2022 23:39:24 - Info - DISCO com serial: AF2020061700074 ja foi inserido.
+14/11/2022 23:39:25 - Info - DISCO com serial:             5VVEEJG3 ja foi inserido.

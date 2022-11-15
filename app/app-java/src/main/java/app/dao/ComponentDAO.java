@@ -4,6 +4,7 @@ import app.controller.component.DiscoControllerStrategy;
 import app.controller.component.ProcessadorControllerStrategy;
 import app.controller.component.RamControllerStrategy;
 import app.model.ComponentModel;
+import app.util.LOGGER;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,10 @@ public class ComponentDAO extends Dao {
 
   public ComponentModel save(ComponentModel component) throws Exception {
     if (componentExists(component.getSerial())) {
-      System.out.println(component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido.");
+      String msg = component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido.";
+      System.out.println(msg);
       component.setIdComponent(getProcessIdPerSerial(component.getSerial()));
+      LOGGER.info(msg, "components");
       return component;
     }
     String querySave = String.format("INSERT INTO ComponentServer"
@@ -33,6 +36,8 @@ public class ComponentDAO extends Dao {
             ComponentDAO.MAXUSE, ComponentDAO.FKSERVER, ComponentDAO.FKTYPE);
 
     System.out.println(String.format("Inserindo %s: ", component.getComponentType().getDescricao()));
+    String msg = String.format("Inserindo %s: ", component.getComponentType().getDescricao());
+    LOGGER.info(msg, "components");
     System.out.println(component);
     Integer res = conn.update(
             querySave,
@@ -48,6 +53,7 @@ public class ComponentDAO extends Dao {
       return component;
     }
     throw new Exception("Houve algo errado.");
+    
   }
 
   private Integer getLastInsertedProcessId() {
