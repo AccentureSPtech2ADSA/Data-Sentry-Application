@@ -1,6 +1,7 @@
 package app.dao;
 
 import app.model.ComponentTypeEnum;
+import app.util.LOGGER;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +9,14 @@ public class ComponentTypeDAO extends Dao {
 
   private Integer save(ComponentTypeEnum type) {
     if (!existsType(type)) {
-      System.out.println("Inserindo Tipo de componente: " + type.getDescricao());
+      String msg = "Inserindo Tipo de componente: " + type.getDescricao();
+      System.out.println(msg);
       String query = "INSERT INTO ComponentType(description, measuramentUnit) VALUES (?, ?)";
+      LOGGER.info(msg, "components");
       return conn.update(query, type.getDescricao(), type.getUnidadeMedida());
     }
+    
+    LOGGER.error("Não foi possível inserir o tipo de componente", "components");
     return 1;
   }
 

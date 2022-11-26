@@ -2,6 +2,7 @@ package app.dao;
 
 import app.model.ComponentModel;
 import app.model.ProcessModel;
+import app.util.LOGGER;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,13 @@ public class ProcessDAO extends Dao {
     String query = "INSERT INTO Process (name) "
             + "VALUES (?)";
 
+      String msg = String.format("Inserindo processo: ", model.getName());
+
+
+      System.out.println(msg);
+      LOGGER.info(msg, "components");
+
     System.out.println(model);
-    System.out.println(String.format("Inserindo processo: ", model.getName()));
 
     Integer res = conn.update(query, model.getName());
     if (res > 0) {
@@ -29,6 +35,8 @@ public class ProcessDAO extends Dao {
       setComponentAws(model);
     } else {
       System.out.println("Houve algum erro.");
+        LOGGER.error("Houve algum erro", "components");
+
     }
     return model;
   }

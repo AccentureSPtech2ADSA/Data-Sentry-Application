@@ -1,6 +1,7 @@
 package app.dao;
 
 import app.model.ComponentModel;
+import app.util.LOGGER;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,10 @@ public class ComponentDAO extends Dao {
   public ComponentModel save(ComponentModel component) throws Exception {
     ComponentModel exists = componentExists(component);
     if (exists != null) {
-      System.out.println(component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido do server " + component.getFkServer());
+      String msg = component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido.";
       component.setIdComponent(exists.getIdComponent());
+      System.out.println(msg);
+      LOGGER.info(msg, "components");
       return component;
     }
     return setComponent(component);
@@ -35,6 +38,8 @@ public class ComponentDAO extends Dao {
             ComponentDAO.MAXUSE, ComponentDAO.FKSERVER, ComponentDAO.FKTYPE);
 
     System.out.println(String.format("Inserindo %s: ", component.getComponentType().getDescricao()));
+    String msg = String.format("Inserindo %s: ", component.getComponentType().getDescricao());
+    LOGGER.info(msg, "components");
     System.out.println(component);
     int res = conn.update(
             querySave,
@@ -50,6 +55,7 @@ public class ComponentDAO extends Dao {
       return component;
     }
     throw new Exception("Houve algo errado.");
+    
   }
 
   private ComponentModel setComponentAws(ComponentModel component) throws Exception {
