@@ -1,14 +1,14 @@
 package app.dao;
 
 import app.database.Database;
-import org.springframework.jdbc.core.JdbcTemplate;
+import app.database.MyJdbcTemplate;
 
 public abstract class Dao {
   
-  protected JdbcTemplate conn;
+  protected MyJdbcTemplate conn;
 
   public Dao() {
-    this.conn = Database.getConn();
+    this.conn = (MyJdbcTemplate) Database.getConn();
   }
 
 }

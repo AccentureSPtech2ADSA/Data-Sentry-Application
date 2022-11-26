@@ -25,11 +25,20 @@ public class ComponentTypeDAO extends Dao {
 
   private Boolean existsType(ComponentTypeEnum type) {
     String query = String.format("SELECT 1 FROM "
-            + "ComponentType WHERE description = ?");
+            + "ComponentType WHERE description = ?;");
 
     List<Map<String, Object>> queryForList = conn.queryForList(query, type.getDescricao());
 
+    if (!queryForList.isEmpty()) {
+      List<Map<String, Object>> queryForListAws = conn.queryForList(query, true, type.getDescricao());
+
+      if (queryForListAws.isEmpty()) {
+        String queryInsert = "INSERT INTO ComponentType(description, measuramentUnit) VALUES (?, ?)";
+        conn.updateAws(queryInsert, true,type.getDescricao(), type.getUnidadeMedida());
+      }
+    }
+
     return !queryForList.isEmpty();
   }
-  
+
 }

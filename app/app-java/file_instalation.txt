@@ -8,3 +8,9 @@
 29/10/2022 01:39:20 - Info - Iniciando Login...
 29/10/2022 01:39:20 - Error - Algo deu errado no sistema
 29/10/2022 01:39:20 - Warning - Email ou senha invalidos
+14/11/2022 21:47:53 - Info - Iniciando Login...
+14/11/2022 21:47:53 - Error - Algo deu errado no sistema
+14/11/2022 21:47:53 - Warning - Email ou senha invalidos
+24/11/2022 01:40:15 - Info - Iniciando Login...
+24/11/2022 01:40:15 - Error - Algo deu errado no sistema
+24/11/2022 01:40:15 - Warning - Email ou senha invalidos

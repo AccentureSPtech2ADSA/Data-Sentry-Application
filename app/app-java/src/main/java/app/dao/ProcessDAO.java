@@ -1,38 +1,86 @@
 package app.dao;
 
+import app.model.ComponentModel;
 import app.model.ProcessModel;
 import java.util.List;
 import java.util.Map;
 
 public class ProcessDAO extends Dao {
 
-  public ProcessModel saveProcess(ProcessModel model) {
-    if (!processExists(model.getName())) {
-      String query = "INSERT INTO Process (name) "
-              + "VALUES (?)";
-
-      System.out.println(model);
-      System.out.println(String.format("Inserindo processo: ", model.getName()));
-
-      Integer res = conn.update(query, model.getName());
-      if (res > 0) {
-        model.setId((long) getLastInsertedProcessId());
-      }else{
-        System.out.println("Houve algum erro.");
-      }
-      return model;
+  public ProcessModel saveProcess(ProcessModel model) throws Exception {
+    if (!processExists(model)) {
+      setComponent(model);
     }
     model.setId((long) getProcessIdPerName(model.getName()));
     return model;
   }
 
-  private Boolean processExists(String name) {
-    String query = String.format("SELECT TOP 1 1 FROM "
-            + "Process WHERE name = ?");
+  private ProcessModel setComponent(ProcessModel model) throws Exception {
+    String query = "INSERT INTO Process (name) "
+            + "VALUES (?)";
 
-    List<Map<String, Object>> queryForList = conn.queryForList(query, name);
+    System.out.println(model);
+    System.out.println(String.format("Inserindo processo: ", model.getName()));
 
+    Integer res = conn.update(query, model.getName());
+    if (res > 0) {
+      model.setId((long) getLastInsertedProcessId());
+
+      setComponentAws(model);
+    } else {
+      System.out.println("Houve algum erro.");
+    }
+    return model;
+  }
+
+  private ProcessModel setComponentAws(ProcessModel model) throws Exception {
+    int exists = processExists(model, true);
+    if (exists <= 0) {
+
+      String query = "INSERT INTO Process (_idProcess, name) VALUES (?,?)";
+
+      System.out.println("Set Process in AWS");
+
+      int res = conn.updateAws(
+              query,
+              true,
+              model.getId(),
+              model.getName());
+
+    } else {
+      model.setId((long) exists);
+    }
+    return model;
+  }
+
+  private Boolean processExists(ProcessModel model) throws Exception {
+    String query = String.format("SELECT TOP 1 _idProcess id FROM Process p WHERE name = ?");
+
+    List<Map<String, Object>> queryForList = conn.queryForList(query, model.getName());
+
+    if (!queryForList.isEmpty()) {
+
+      int id = (int) queryForList.get(0).get("id");
+
+      model.setId((long) id);
+
+      setComponentAws(model);
+
+    }
     return !queryForList.isEmpty();
+  }
+
+  private int processExists(ProcessModel model, boolean aws) throws Exception {
+    String query = String.format("SELECT TOP 1 _idProcess id FROM Process p WHERE name = ?");
+
+    List<Map<String, Object>> queryForList = null;
+    queryForList = aws
+            ? conn.queryForList(query, true, model.getName())
+            : conn.queryForList(query, model.getName());
+
+    return queryForList != null
+            && !queryForList.isEmpty()
+            ? (int) queryForList.get(0).get("id") : -1;
   }
 
   private Integer getLastInsertedProcessId() {
@@ -52,5 +100,5 @@ public class ProcessDAO extends Dao {
 
     return (int) queryForList.get(0).get("id");
   }
-  
+
 }

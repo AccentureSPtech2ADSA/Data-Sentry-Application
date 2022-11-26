@@ -14,16 +14,11 @@ import java.util.Map;
 
 public class ServerController extends ControllerLooca {
 
-  public ServerModel getServer() throws IOException, ClassNotFoundException {
+  public ServerModel getServer(Integer fkHospital) throws IOException, ClassNotFoundException {
     String serial = getSerialServer();
     String description = looca.getSistema().getSistemaOperacional();
-    Integer fkHospital = getFkHospital();
 
     return new ServerModel(serial, description, fkHospital);
-  }
-
-  private Integer getFkHospital() {
-    return 5;
   }
 
   private String getMotherboardSerialWindows() throws ClassNotFoundException {

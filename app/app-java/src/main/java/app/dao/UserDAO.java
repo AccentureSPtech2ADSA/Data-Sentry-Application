@@ -1,6 +1,5 @@
 package app.dao;
 
-import app.controller.UserController;
 import app.model.UserModel;
 import java.util.List;
 import java.util.Map;

@@ -1,8 +1,5 @@
 package app.dao;
 
-import app.controller.component.DiscoControllerStrategy;
-import app.controller.component.ProcessadorControllerStrategy;
-import app.controller.component.RamControllerStrategy;
 import app.model.ComponentModel;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +19,16 @@ public class ComponentDAO extends Dao {
   }
 
   public ComponentModel save(ComponentModel component) throws Exception {
-    if (componentExists(component.getSerial())) {
-      System.out.println(component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido.");
-      component.setIdComponent(getProcessIdPerSerial(component.getSerial()));
+    ComponentModel exists = componentExists(component);
+    if (exists != null) {
+      System.out.println(component.getComponentType().getDescricao() + " com serial: " + component.getSerial() + " ja foi inserido do server " + component.getFkServer());
+      component.setIdComponent(exists.getIdComponent());
       return component;
     }
+    return setComponent(component);
+  }
+
+  private ComponentModel setComponent(ComponentModel component) throws Exception {
     String querySave = String.format("INSERT INTO ComponentServer"
             + "(%s, %s, %s, %s, %s, %s) VALUES (?,?,?,?,?,?)",
             ComponentDAO.SERIAL, ComponentDAO.MODEL, ComponentDAO.BRAND,
@@ -34,23 +36,46 @@ public class ComponentDAO extends Dao {
 
     System.out.println(String.format("Inserindo %s: ", component.getComponentType().getDescricao()));
     System.out.println(component);
-    Integer res = conn.update(
+    int res = conn.update(
             querySave,
             component.getSerial(),
             component.getModel(),
             component.getBrand(),
             component.getMaxUseFormated(),
             component.getFkServer(),
-            component.getComponentType().getIdTypeComponent()
-    );
+            component.getComponentType().getIdTypeComponent());
     if (res > 0) {
-      component.setIdComponent(getLastInsertedProcessId());
+      component.setIdComponent(getLastInsertedComponentId());
+      setComponentAws(component);
       return component;
     }
     throw new Exception("Houve algo errado.");
   }
 
-  private Integer getLastInsertedProcessId() {
+  private ComponentModel setComponentAws(ComponentModel component) throws Exception {
+    ComponentModel exists = componentExists(component,true);
+    String querySave = String.format("INSERT INTO ComponentServer"
+            + "(_idComponentServer, %s, %s, %s, %s, %s, %s) VALUES (?,?,?,?,?,?,?)",
+            ComponentDAO.SERIAL, ComponentDAO.MODEL, ComponentDAO.BRAND,
+            ComponentDAO.MAXUSE, ComponentDAO.FKSERVER, ComponentDAO.FKTYPE);
+
+    System.out.println("Set Component in AWS");
+    
+    int res = conn.updateAws(
+            querySave,
+            true,
+            component.getIdComponent(),
+            component.getSerial(),
+            component.getModel(),
+            component.getBrand(),
+            component.getMaxUseFormated(),
+            component.getFkServer(),
+            component.getComponentType().getIdTypeComponent());
+
+    return component;
+  }
+
+  private Integer getLastInsertedComponentId() {
     String query = String.format("SELECT TOP 1 _idComponentServer id FROM "
             + "ComponentServer ORDER BY _idComponentServer DESC");
 
@@ -68,12 +93,64 @@ public class ComponentDAO extends Dao {
     return (int) queryForList.get(0).get("id");
   }
 
-  private Boolean componentExists(String serial) {
-    String query = String.format("SELECT 1 FROM "
-            + "ComponentServer WHERE serial = ?");
+  private ComponentModel componentExists(ComponentModel c, boolean aws) {
+    String query = String.format("SELECT TOP 1 _idComponentServer id FROM ComponentServer cs WHERE serial = "
+            + "? AND fkServer = ? OR cs.maxUse = "
+            + "? AND fkServer = ? AND model = 'RAM'"); 
+    List<Map<String, Object>> list = null;
+    list = aws ? conn.queryForList(
+            query,
+            true,
+            c.getSerial(),
+            c.getFkServer(),
+            c.getMaxUseFormated(),
+            c.getFkServer()
+    ):
+            conn.queryForList(
+            query,
+            c.getSerial(),
+            c.getFkServer(),
+            c.getMaxUseFormated(),
+            c.getFkServer()
+    );
+    if (!list.isEmpty()) {
+      Integer id = (int) list.get(0).get("id");
+      c.setIdComponent(id);
+      return c;
+    }
+    return c;
+  }
+  private ComponentModel componentExists(ComponentModel c) throws Exception {
+    String query = String.format("SELECT TOP 1 _idComponentServer id FROM ComponentServer cs WHERE serial = "
+            + "? AND fkServer = ? OR cs.maxUse = "
+            + "? AND fkServer = ? AND model = 'RAM'"); 
 
-    List<Map<String, Object>> queryForList = conn.queryForList(query, serial);
+    List<Map<String, Object>> listAzure = conn.queryForList(
+            query,
+            c.getSerial(),
+            c.getFkServer(),
+            c.getMaxUseFormated(),
+            c.getFkServer()
+    );
 
-    return !queryForList.isEmpty();
+    if (!listAzure.isEmpty()) {
+
+      Integer id = (int) listAzure.get(0).get("id");
+      c.setIdComponent(id);
+
+      List<Map<String, Object>> listAws = conn.queryForList(
+            query,true,
+            c.getSerial(),
+            c.getFkServer(),
+            c.getMaxUseFormated(),
+            c.getFkServer()
+    );
+      if(listAws.isEmpty()){
+        setComponentAws(c);
+      }
+
+      return c;
+    }
+    return null;
   }
 }

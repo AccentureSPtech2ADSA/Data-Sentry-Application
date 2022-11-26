@@ -1,28 +1,9 @@
 package classes.app.gui;
 
-import app.controller.ProcessController;
-import app.controller.ServerController;
-import app.controller.component.DiscoControllerStrategy;
-import app.controller.component.ProcessadorControllerStrategy;
-import app.controller.component.RamControllerStrategy;
-import app.dao.ComponentDAO;
-import app.dao.LogProcessComponentDAO;
-import app.dao.ProcessDAO;
-import app.dao.ServerDAO;
+import app.controller.UserSingleton;
 import app.dao.UserDAO;
-import app.model.ComponentModel;
-import app.model.LogComponentProcess;
-import app.model.ProcessModel;
-import app.model.ServerModel;
 import app.model.UserModel;
 import classes.app.cli.LoginCli;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
 public class InterfaceLogin extends javax.swing.JFrame {
@@ -248,7 +229,9 @@ public class InterfaceLogin extends javax.swing.JFrame {
       UserDAO dao = new UserDAO();
       String emailLogin = email.getText();
       String senhaLogin = String.valueOf(senha.getPassword());
-      UserModel user = dao.login(emailLogin, senhaLogin);
+//      UserModel user = dao.login(emailLogin, senhaLogin);
+        UserModel user = dao.login("guilhermedelfino25@gmail.com", "#Gfgrupo1");
+    UserSingleton.user = user;
 
       if (user.getIdUser() != null && user.getIdUser() > 0) {
         String msg = "Seja bem vindo " + user.getName() + "!";
@@ -269,12 +252,12 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
   public static void main(String args[]) {
-    String isGraphical = System.getenv().getOrDefault("XDG_CURRENT_DESKTOP", "");
+    String isGraphical = System.getenv().getOrDefault("XDG_CURRENT_DESKTO", "");
     if (isGraphical == null || isGraphical.equals("") || isGraphical.trim().length() == 0) {
       LoginCli cli = new LoginCli();
       if (cli.hasConsole()) {
         if (cli.welcome()) {
-          doLogin(cli);
+          LoginCli.doLogin(cli);
         }
       } else {
         System.out.println("Não tem console");
@@ -285,74 +268,6 @@ public class InterfaceLogin extends javax.swing.JFrame {
           new InterfaceLogin().setVisible(true);
         }
       });
-    }
-  }
-
-  private static void doLogin(LoginCli cli) {
-    cli.readEmail();
-    cli.readPassword();
-
-    UserDAO userDao = new UserDAO();
-    UserModel user = userDao.login(cli.getEmail(), cli.getPass());
-    if (user.getFkHospital() != null && user.getFkHospital() > 0) {
-      // segue o processo
-      postLoginCli(user);
-    } else {
-      doLogin(cli);
-    }
-  }
-
-  private static void postLoginCli(UserModel user) {
-    // set server;
-    try {
-      ServerDAO serverDAO = new ServerDAO();
-      ServerModel server = serverDAO.save(new ServerController().getServer());
-      System.out.println("Serial server: " + server.getSerialServer());
-
-      ComponentDAO componentDAO = new ComponentDAO();
-      ComponentModel ram = componentDAO.save(new RamControllerStrategy().getComponent(server.getSerialServer()));
-      ComponentModel cpu = componentDAO.save(new ProcessadorControllerStrategy().getComponent(server.getSerialServer()));
-      List<ComponentModel> discos = new ArrayList<>();
-      new DiscoControllerStrategy().getComponents(server.getSerialServer())
-              .forEach(d -> {
-                try {
-                  ComponentModel save = componentDAO.save(d);
-                  discos.add(save);
-                } catch (Exception e) {
-                  System.out.println("Houve algo de errado ao inserir disco.");
-                }
-              });
-
-      new Timer().scheduleAtFixedRate(new TimerTask() {
-        @Override
-        public void run() {
-
-          Date date = new Date();
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
-          String now = sdf.format(date);
-
-          ProcessDAO processDao = new ProcessDAO();
-          LogProcessComponentDAO logDao = new LogProcessComponentDAO();
-          System.out.println("Monitorando: " + now);
-          new ProcessController()
-                  .getProcessPerMemo()
-                  .forEach(process -> {
-                    ProcessModel saveProcess = processDao.saveProcess(process);
-                    // get logs too
-                    LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
-                    LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
-                    LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
-
-                    logDao.save(logCpu, now);
-                    logDao.save(logDisco, now);
-                    logDao.save(logRam, now);
-                  });
-        }
-      }, 0, 1000 * 60);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Houve algo de errado.");
     }
   }
 
