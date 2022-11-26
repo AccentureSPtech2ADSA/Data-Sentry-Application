@@ -1,6 +1,5 @@
 package app.dao;
 
-import app.controller.UserController;
 import app.model.UserModel;
 import app.util.LOGGER;
 import java.util.List;

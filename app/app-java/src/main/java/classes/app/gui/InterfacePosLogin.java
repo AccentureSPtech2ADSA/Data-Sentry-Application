@@ -2,6 +2,7 @@ package classes.app.gui;
 
 import app.controller.ProcessController;
 import app.controller.ServerController;
+import app.controller.UserSingleton;
 import app.controller.component.DiscoControllerStrategy;
 import app.controller.component.ProcessadorControllerStrategy;
 import app.controller.component.RamControllerStrategy;
@@ -13,16 +14,12 @@ import app.model.ComponentModel;
 import app.model.LogComponentProcess;
 import app.model.ProcessModel;
 import app.model.ServerModel;
-import app.model.UserModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class InterfacePosLogin extends javax.swing.JFrame {
 
@@ -42,20 +39,22 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     this.componentDAO = new ComponentDAO();
 
     Timer timer = new Timer();
-    final long secondsToGetDatas = (1000 * 3);
+    final long secondsToGetDatas = (1000 * 4);
 
-    TimerTask taskServer = new TimerTask() {
-      @Override
-      public void run() {
-        labelTextoVariavel.setText("Configurando o servidor...");
+    labelTextoVariavel.setText("Configurando o servidor...");
         ServerDAO serverDAO = new ServerDAO();
         try {
-          server = serverDAO.save(new ServerController().getServer());
+          server = serverDAO.save(new ServerController().getServer(UserSingleton.user.getFkHospital()));
           System.out.println("Serial server: " + server.getSerialServer());
         } catch (Exception e) {
           e.printStackTrace();
           labelTextoVariavel.setText("Houve algo errado em capturar dados do servidor...");
         }
+    
+    TimerTask taskServer = new TimerTask() {
+      @Override
+      public void run() {
+        
       }
     };
 
@@ -126,25 +125,27 @@ public class InterfacePosLogin extends javax.swing.JFrame {
           public void run() {
             
             Date date = new Date();
+            date.setHours(date.getHours() - 1);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
             String now = sdf.format(date);
             
             ProcessDAO processDao = new ProcessDAO();
-            LogProcessComponentDAO logDao = new LogProcessComponentDAO();
             System.out.println("Monitorando: " + now);
             new ProcessController()
                     .getProcessPerMemo()
                     .forEach(process -> {
+                      LogProcessComponentDAO logDao = new LogProcessComponentDAO();
+                      try{
                       ProcessModel saveProcess = processDao.saveProcess(process);
-                      // get logs too
                       LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
                       LogComponentProcess logDisco = new LogComponentProcess(disco, saveProcess);
                       LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
-
-                      
                       logDao.save(logCpu, now);
                       logDao.save(logDisco, now);
                       logDao.save(logRam, now);
+                      }catch(Exception e){
+                        e.printStackTrace();
+                      }
                     });
           }
         }, 0, 1000 * 60);
@@ -152,10 +153,10 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     };
 
     timer.schedule(taskServer, secondsToGetDatas);
-    timer.schedule(task1, secondsToGetDatas * 2);
-    timer.schedule(task2, secondsToGetDatas * 3);
-    timer.schedule(task3, secondsToGetDatas * 4);
-    timer.schedule(taskFinal, secondsToGetDatas * 5);
+    timer.schedule(task1, secondsToGetDatas * 3);
+    timer.schedule(task2, secondsToGetDatas * 5);
+    timer.schedule(task3, secondsToGetDatas * 7);
+    timer.schedule(taskFinal, secondsToGetDatas * 9);
   }
 
   @SuppressWarnings("unchecked")

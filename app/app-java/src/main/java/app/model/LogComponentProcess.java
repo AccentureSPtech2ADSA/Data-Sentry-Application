@@ -10,8 +10,6 @@ public class LogComponentProcess {
   private Date date;
   private Double usageComponent;
 
- 
-
   public LogComponentProcess(ComponentModel component, ProcessModel process) {
     this.component = component;
     this.process = process;
