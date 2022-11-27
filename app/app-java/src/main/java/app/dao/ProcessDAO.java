@@ -46,9 +46,7 @@ public class ProcessDAO extends Dao {
     if (exists <= 0) {
 
       String query = "INSERT INTO Process (_idProcess, name) VALUES (?,?)";
-
-      System.out.println("Set Process in AWS");
-
+      
       int res = conn.updateAws(
               query,
               true,

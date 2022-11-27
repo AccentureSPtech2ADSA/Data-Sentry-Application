@@ -14,6 +14,7 @@ import app.model.ComponentModel;
 import app.model.LogComponentProcess;
 import app.model.ProcessModel;
 import app.model.ServerModel;
+import app.util.LOGGER;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,19 +43,21 @@ public class InterfacePosLogin extends javax.swing.JFrame {
     final long secondsToGetDatas = (1000 * 4);
 
     labelTextoVariavel.setText("Configurando o servidor...");
-        ServerDAO serverDAO = new ServerDAO();
-        try {
-          server = serverDAO.save(new ServerController().getServer(UserSingleton.user.getFkHospital()));
-          System.out.println("Serial server: " + server.getSerialServer());
-        } catch (Exception e) {
-          e.printStackTrace();
-          labelTextoVariavel.setText("Houve algo errado em capturar dados do servidor...");
-        }
-    
+    ServerDAO serverDAO = new ServerDAO();
+    try {
+      server = serverDAO.save(new ServerController().getServer(UserSingleton.user.getFkHospital()));
+      System.out.println("Serial server: " + server.getSerialServer());
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage(), "components");
+      LOGGER.error("Houve algo errado em capturar dados do servidor...", "components");
+
+      labelTextoVariavel.setText("Houve algo errado em capturar dados do servidor...");
+    }
+
     TimerTask taskServer = new TimerTask() {
       @Override
       public void run() {
-        
+
       }
     };
 
@@ -65,7 +68,9 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         try {
           cpu = componentDAO.save(new ProcessadorControllerStrategy().getComponent(server.getSerialServer()));
         } catch (Exception ex) {
-          ex.printStackTrace();
+
+          LOGGER.error(ex.getMessage(), "components");
+          LOGGER.error("Houve algo errado em capturar dados do CPU...", "components");
           labelTextoVariavel.setText("Houve algo errado em capturar dados do CPU...");
         }
       }
@@ -79,7 +84,9 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         try {
           ram = componentDAO.save(new RamControllerStrategy().getComponent(server.getSerialServer()));
         } catch (Exception ex) {
-          ex.printStackTrace();
+
+          LOGGER.error(ex.getMessage(), "components");
+          LOGGER.error("Houve algo errado em capturar dados da RAM...", "components");
           labelTextoVariavel.setText("Houve algo errado em capturar dados da RAM...");
         }
       }
@@ -98,12 +105,18 @@ public class InterfacePosLogin extends javax.swing.JFrame {
                       discos.add(save);
                     } catch (Exception e) {
                       System.out.println("Houve algo de errado ao inserir disco.");
+
+                      LOGGER.error(e.getMessage(), "components");
+                      LOGGER.error("Houve algo de errado ao inserir disco.", "components");
                     }
                   });
           disco = discos.get(0);
         } catch (Exception ex) {
           ex.printStackTrace();
-          labelTextoVariavel.setText("Houve algo errado em capturar dados dos discos...");
+
+          LOGGER.error(ex.getMessage(), "components");
+          LOGGER.error("Houve algo de errado ao inserir disco.", "components");
+          labelTextoVariavel.setText("Houve algo de errado ao inserir disco.");
         }
 
       }
@@ -123,28 +136,29 @@ public class InterfacePosLogin extends javax.swing.JFrame {
         new Timer().scheduleAtFixedRate(new TimerTask() {
           @Override
           public void run() {
-            
+
             Date date = new Date();
             date.setHours(date.getHours() - 1);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
             String now = sdf.format(date);
-            
+
             ProcessDAO processDao = new ProcessDAO();
             System.out.println("Monitorando: " + now);
             new ProcessController()
                     .getProcessPerMemo()
                     .forEach(process -> {
                       LogProcessComponentDAO logDao = new LogProcessComponentDAO();
-                      try{
-                      ProcessModel saveProcess = processDao.saveProcess(process);
-                      LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
-                      LogComponentProcess logDisco = new LogComponentProcess(disco, saveProcess);
-                      LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
-                      logDao.save(logCpu, now);
-                      logDao.save(logDisco, now);
-                      logDao.save(logRam, now);
-                      }catch(Exception e){
+                      try {
+                        ProcessModel saveProcess = processDao.saveProcess(process);
+                        LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
+                        LogComponentProcess logDisco = new LogComponentProcess(disco, saveProcess);
+                        LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
+                        logDao.save(logCpu, now);
+                        logDao.save(logDisco, now);
+                        logDao.save(logRam, now);
+                      } catch (Exception e) {
                         e.printStackTrace();
+                        LOGGER.error(e.getMessage(), "components");
                       }
                     });
           }

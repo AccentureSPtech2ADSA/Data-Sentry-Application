@@ -23,3 +23,108 @@
 14/11/2022 23:39:23 - Info - CPU com serial: BFEBFBFF000306A9 ja foi inserido.
 14/11/2022 23:39:24 - Info - DISCO com serial: AF2020061700074 ja foi inserido.
 14/11/2022 23:39:25 - Info - DISCO com serial:             5VVEEJG3 ja foi inserido.
+27/11/2022 00:53:45 - Info - Inserindo servidor: 
+27/11/2022 00:53:47 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 00:53:48 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 00:53:48 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 00:53:49 - Info - Inserindo RAM: 
+27/11/2022 00:56:43 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 00:56:44 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 00:56:44 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 00:56:45 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 00:56:46 - Info - RAM com serial: 461129530 ja foi inserido.
+27/11/2022 00:56:46 - Info - Inserindo CPU: 
+27/11/2022 01:15:42 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 01:15:43 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 01:15:44 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 01:15:44 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 01:15:45 - Info - RAM com serial: 1942356772 ja foi inserido.
+27/11/2022 01:15:46 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 01:15:46 - Info - Inserindo DISCO: 
+27/11/2022 01:16:51 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 01:16:52 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 01:16:53 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 01:16:53 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 01:16:54 - Info - RAM com serial: 1582028874 ja foi inserido.
+27/11/2022 01:16:55 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 01:16:56 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 01:42:03 - Info - Inserindo processo: 
+27/11/2022 01:43:02 - Info - Inserindo processo: 
+27/11/2022 02:01:00 - Info - Inserindo processo: 
+27/11/2022 02:35:51 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 02:35:52 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:35:53 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:35:54 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:35:55 - Info - RAM com serial: 461129530 ja foi inserido.
+27/11/2022 02:35:55 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 02:35:56 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 02:37:05 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 02:37:06 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:37:07 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:37:08 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:37:08 - Info - RAM com serial: 461129530 ja foi inserido.
+27/11/2022 02:37:09 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 02:37:10 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 02:38:57 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 02:38:58 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:38:59 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:39:00 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:39:01 - Info - RAM com serial: 461129530 ja foi inserido.
+27/11/2022 02:39:02 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 02:39:03 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 02:40:46 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 02:40:47 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:40:47 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:40:48 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:41:28 - Info - RAM com serial: 2120063568 ja foi inserido.
+27/11/2022 02:43:32 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 02:46:41 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 02:46:42 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:46:43 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:46:43 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:47:01 - Info - RAM com serial: 2120063568 ja foi inserido.
+27/11/2022 02:50:20 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 02:50:21 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:50:22 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:50:23 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 02:50:24 - Info - RAM com serial: 461129530 ja foi inserido.
+27/11/2022 02:50:25 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 02:50:26 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 03:26:58 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 03:27:00 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 03:27:01 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 03:27:02 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 03:27:06 - Info - RAM com serial: 913065088 ja foi inserido.
+27/11/2022 03:27:33 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 03:27:35 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 02:59:00 - Error - Algo deu errado no sistema
+27/11/2022 02:59:22 - Error - Algo deu errado no sistema
+27/11/2022 03:00:29 - Error - Algo deu errado no sistema
+27/11/2022 03:06:41 - Error - Algo deu errado no sistema
+27/11/2022 03:08:13 - Error - Algo deu errado no sistema
+27/11/2022 03:09:07 - Error - Algo deu errado no sistema
+27/11/2022 03:11:15 - Error - Algo deu errado no sistema
+27/11/2022 03:21:35 - Error - Algo deu errado no sistema
+27/11/2022 03:21:52 - Error - Algo deu errado no sistema
+27/11/2022 03:22:24 - Error - Algo deu errado no sistema
+27/11/2022 03:23:23 - Error - Algo deu errado no sistema
+27/11/2022 03:23:31 - Error - Algo deu errado no sistema
+27/11/2022 03:24:05 - Error - Algo deu errado no sistema
+27/11/2022 03:35:39 - Error - Algo deu errado no sistema
+27/11/2022 03:43:52 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 03:43:53 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 03:43:54 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 03:43:55 - Error - Não foi possível inserir o tipo de componente
+27/11/2022 03:43:56 - Info - RAM com serial: 756936249 ja foi inserido.
+27/11/2022 03:43:57 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 03:43:58 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 04:10:40 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 04:10:44 - Info - RAM com serial: 1398241764 ja foi inserido.
+27/11/2022 04:10:45 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 04:10:45 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 04:14:36 - Error - null
+27/11/2022 04:14:37 - Error - Houve algo errado em capturar dados do servidor...
+27/11/2022 04:17:26 - Warning - Servidor com serial: 0242AAB3F19D ja foi inserido.
+27/11/2022 04:17:29 - Info - RAM com serial: 756936249 ja foi inserido.
+27/11/2022 04:17:30 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 04:17:31 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.

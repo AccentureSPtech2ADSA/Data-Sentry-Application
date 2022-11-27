@@ -3,6 +3,7 @@ package classes.app.gui;
 import app.controller.UserSingleton;
 import app.dao.UserDAO;
 import app.model.UserModel;
+import app.util.LOGGER;
 import classes.app.cli.LoginCli;
 import javax.swing.JOptionPane;
 
@@ -229,9 +230,8 @@ public class InterfaceLogin extends javax.swing.JFrame {
       UserDAO dao = new UserDAO();
       String emailLogin = email.getText();
       String senhaLogin = String.valueOf(senha.getPassword());
-//      UserModel user = dao.login(emailLogin, senhaLogin);
-        UserModel user = dao.login("guilhermedelfino25@gmail.com", "#Gfgrupo1");
-    UserSingleton.user = user;
+      UserModel user = dao.login(emailLogin, senhaLogin);
+      UserSingleton.user = user;
 
       if (user.getIdUser() != null && user.getIdUser() > 0) {
         String msg = "Seja bem vindo " + user.getName() + "!";
@@ -243,6 +243,8 @@ public class InterfaceLogin extends javax.swing.JFrame {
       } else {
         String msg = "Email ou senha invalidos!";
         System.out.println(msg);
+        LOGGER.warning(msg, "users");
+
         JOptionPane.showMessageDialog(this, msg);
       }
     }//GEN-LAST:event_buttonLoginActionPerformed
@@ -261,12 +263,12 @@ public class InterfaceLogin extends javax.swing.JFrame {
         }
       } else {
         System.out.println("Não tem console");
+        LOGGER.warning("Não tem console", "users");
+
       }
     } else {
-      java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-          new InterfaceLogin().setVisible(true);
-        }
+      java.awt.EventQueue.invokeLater(() -> {
+        new InterfaceLogin().setVisible(true);
       });
     }
   }

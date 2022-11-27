@@ -3,3 +3,50 @@
 14/11/2022 23:35:55 - Info - Seja bem vindo(a) eduardo
 14/11/2022 23:39:20 - Info - Login efetuado com sucesso
 14/11/2022 23:39:20 - Info - Seja bem vindo(a) eduardo
+27/11/2022 00:51:11 - Info - Login efetuado com sucesso
+27/11/2022 00:51:11 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 00:53:45 - Info - Login efetuado com sucesso
+27/11/2022 00:53:45 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 00:56:18 - Error - Email e senha incorretos.
+27/11/2022 00:56:41 - Info - Login efetuado com sucesso
+27/11/2022 00:56:41 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 01:15:40 - Info - Login efetuado com sucesso
+27/11/2022 01:15:40 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 01:16:49 - Info - Login efetuado com sucesso
+27/11/2022 01:16:49 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:35:38 - Error - Email e senha incorretos.
+27/11/2022 02:35:50 - Info - Login efetuado com sucesso
+27/11/2022 02:35:50 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:37:03 - Info - Login efetuado com sucesso
+27/11/2022 02:37:03 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:38:56 - Info - Login efetuado com sucesso
+27/11/2022 02:38:56 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:40:26 - Error - Email e senha incorretos.
+27/11/2022 02:40:34 - Error - Email e senha incorretos.
+27/11/2022 02:40:44 - Info - Login efetuado com sucesso
+27/11/2022 02:40:44 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:46:39 - Info - Login efetuado com sucesso
+27/11/2022 02:46:39 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:50:19 - Info - Login efetuado com sucesso
+27/11/2022 02:50:19 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:51:16 - Info - Login efetuado com sucesso
+27/11/2022 02:51:16 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:53:14 - Info - Login efetuado com sucesso
+27/11/2022 02:53:14 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 02:58:14 - Info - Login efetuado com sucesso
+27/11/2022 02:58:14 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 03:20:47 - Info - Login efetuado com sucesso
+27/11/2022 03:20:47 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 03:24:24 - Info - Login efetuado com sucesso
+27/11/2022 03:24:24 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 03:24:21 - Error - Algo deu errado no sistema
+27/11/2022 03:31:15 - Error - Algo deu errado no sistema
+27/11/2022 03:43:40 - Error - Email e senha incorretos.
+27/11/2022 03:43:50 - Info - Login efetuado com sucesso
+27/11/2022 03:43:50 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 04:10:18 - Warning - Email e senha incorretos.
+27/11/2022 04:10:38 - Info - Login efetuado com sucesso
+27/11/2022 04:10:38 - Info - Seja bem vindo(a) nome fantasia
+27/11/2022 04:17:07 - Warning - Email e senha incorretos.
+27/11/2022 04:17:24 - Info - Login efetuado com sucesso
+27/11/2022 04:17:24 - Info - Seja bem vindo(a) nome fantasia
