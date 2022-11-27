@@ -15,6 +15,7 @@ import app.model.LogComponentProcess;
 import app.model.ProcessModel;
 import app.model.ServerModel;
 import app.model.UserModel;
+import app.util.LOGGER;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +43,8 @@ public class PostLoginCli {
                   discos.add(save);
                 } catch (Exception e) {
                   System.out.println("Houve algo de errado ao inserir disco.");
+                  LOGGER.error(e.getMessage(), "components");
+                  LOGGER.error(e.getMessage(), "Houve algo de errado ao inserir disco.");
                 }
               });
 
@@ -61,17 +64,19 @@ public class PostLoginCli {
                   .forEach(process -> {
                     try {
 
-                    ProcessModel saveProcess = processDao.saveProcess(process);
-                    // get logs too
-                    LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
-                    LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
-                    LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
+                      ProcessModel saveProcess = processDao.saveProcess(process);
+                      // get logs too
+                      LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
+                      LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
+                      LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
 
-                    logDao.save(logCpu, now);
-                    logDao.save(logDisco, now);
-                    logDao.save(logRam, now);
+                      logDao.save(logCpu, now);
+                      logDao.save(logDisco, now);
+                      logDao.save(logRam, now);
                     } catch (Exception e) {
                       e.printStackTrace();
+                      LOGGER.error(e.getMessage(), "components");
+
                     }
                   });
         }
@@ -79,6 +84,7 @@ public class PostLoginCli {
 
     } catch (Exception e) {
       e.printStackTrace();
+      LOGGER.error(e.getMessage(), "components");
       System.out.println("Houve algo de errado.");
     }
   }

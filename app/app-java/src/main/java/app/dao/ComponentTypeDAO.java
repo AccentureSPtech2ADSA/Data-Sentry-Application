@@ -16,7 +16,6 @@ public class ComponentTypeDAO extends Dao {
       return conn.update(query, type.getDescricao(), type.getUnidadeMedida());
     }
     
-    LOGGER.error("Não foi possível inserir o tipo de componente", "components");
     return 1;
   }
 

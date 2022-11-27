@@ -54,19 +54,19 @@ public class ComponentDAO extends Dao {
       setComponentAws(component);
       return component;
     }
+    LOGGER.error("Houve algo errado ao inserir componente.", "components");
     throw new Exception("Houve algo errado.");
-    
   }
 
   private ComponentModel setComponentAws(ComponentModel component) throws Exception {
-    ComponentModel exists = componentExists(component,true);
+    ComponentModel exists = componentExists(component, true);
     String querySave = String.format("INSERT INTO ComponentServer"
             + "(_idComponentServer, %s, %s, %s, %s, %s, %s) VALUES (?,?,?,?,?,?,?)",
             ComponentDAO.SERIAL, ComponentDAO.MODEL, ComponentDAO.BRAND,
             ComponentDAO.MAXUSE, ComponentDAO.FKSERVER, ComponentDAO.FKTYPE);
 
     System.out.println("Set Component in AWS");
-    
+
     int res = conn.updateAws(
             querySave,
             true,
@@ -102,7 +102,7 @@ public class ComponentDAO extends Dao {
   private ComponentModel componentExists(ComponentModel c, boolean aws) {
     String query = String.format("SELECT TOP 1 _idComponentServer id FROM ComponentServer cs WHERE serial = "
             + "? AND fkServer = ? OR cs.maxUse = "
-            + "? AND fkServer = ? AND model = 'RAM'"); 
+            + "? AND fkServer = ? AND model = 'RAM'");
     List<Map<String, Object>> list = null;
     list = aws ? conn.queryForList(
             query,
@@ -111,14 +111,14 @@ public class ComponentDAO extends Dao {
             c.getFkServer(),
             c.getMaxUseFormated(),
             c.getFkServer()
-    ):
-            conn.queryForList(
-            query,
-            c.getSerial(),
-            c.getFkServer(),
-            c.getMaxUseFormated(),
-            c.getFkServer()
-    );
+    )
+            : conn.queryForList(
+                    query,
+                    c.getSerial(),
+                    c.getFkServer(),
+                    c.getMaxUseFormated(),
+                    c.getFkServer()
+            );
     if (!list.isEmpty()) {
       Integer id = (int) list.get(0).get("id");
       c.setIdComponent(id);
@@ -126,10 +126,11 @@ public class ComponentDAO extends Dao {
     }
     return c;
   }
+
   private ComponentModel componentExists(ComponentModel c) throws Exception {
     String query = String.format("SELECT TOP 1 _idComponentServer id FROM ComponentServer cs WHERE serial = "
             + "? AND fkServer = ? OR cs.maxUse = "
-            + "? AND fkServer = ? AND model = 'RAM'"); 
+            + "? AND fkServer = ? AND model = 'RAM'");
 
     List<Map<String, Object>> listAzure = conn.queryForList(
             query,
@@ -145,13 +146,13 @@ public class ComponentDAO extends Dao {
       c.setIdComponent(id);
 
       List<Map<String, Object>> listAws = conn.queryForList(
-            query,true,
-            c.getSerial(),
-            c.getFkServer(),
-            c.getMaxUseFormated(),
-            c.getFkServer()
-    );
-      if(listAws.isEmpty()){
+              query, true,
+              c.getSerial(),
+              c.getFkServer(),
+              c.getMaxUseFormated(),
+              c.getFkServer()
+      );
+      if (listAws.isEmpty()) {
         setComponentAws(c);
       }
 

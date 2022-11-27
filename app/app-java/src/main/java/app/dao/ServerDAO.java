@@ -1,6 +1,7 @@
 package app.dao;
 
 import app.model.ServerModel;
+import app.util.LOGGER;
 import java.util.List;
 import java.util.Map;
 
@@ -9,9 +10,9 @@ public class ServerDAO extends Dao {
   public ServerModel save(ServerModel server) {
     if (componentExists(server)) {
 
-      String msg = "Servidor com serial: "+ server.getSerialServer()+ " ja foi inserido.";
-        System.out.println(msg);
-        LOGGER.warning(msg, "components");
+      String msg = "Servidor com serial: " + server.getSerialServer() + " ja foi inserido.";
+      System.out.println(msg);
+      LOGGER.warning(msg, "components");
       return server;
     }
     String query = "INSERT INTO Server (_serialServer, isActive, description, fkHospital) "
@@ -20,6 +21,7 @@ public class ServerDAO extends Dao {
     System.out.println(msg);
     LOGGER.info(msg, "components");
     Integer res = conn.update(query, server.getSerialServer(), server.getIsActive(), server.getDescription(), server.getFkHospital());
+    conn.updateAws(query, true, server.getSerialServer(), server.getIsActive(), server.getDescription(), server.getFkHospital());
     if (res > 0) {
       return server;
     }
@@ -36,12 +38,13 @@ public class ServerDAO extends Dao {
       String exists = componentExists(model, true);
       if (exists == null) {
         String queryInsert = "INSERT INTO Server (_serialServer, isActive, description, fkHospital) VALUES (?, ?, ?, ?)";
-        System.out.println(String.format("Inserindo servidor: ", model.getSerialServer()));
+        System.out.println(String.format("Inserindo servidor AWS: ", model.getSerialServer()));
+        LOGGER.info(String.format("Inserindo servidor AWS: ", model.getSerialServer()), "components");
         System.out.println(model);
         Integer res = conn.updateAws(queryInsert, true, model.getSerialServer(), model.getIsActive(), model.getDescription(), model.getFkHospital());
 
-        System.out.println("Res Set server AWS " + res);
-      }else{
+      } else {
+
         System.out.println("Server already exists in aws database");
       }
     }

@@ -33,7 +33,7 @@ public class UserDAO extends Dao {
               });
     } else {
       System.out.println("Email e senha incorretos.");
-      LOGGER.error("Email e senha incorretos.", "users");
+      LOGGER.warning("Email e senha incorretos.", "users");
     }
     
     return user;
