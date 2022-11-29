@@ -26,7 +26,7 @@ public class MyJdbcTemplate extends JdbcTemplate {
   }
 
   public int updateAws(String sql, boolean aws, Object... args) {
-    if (!templates.isEmpty()) {
+    if (templates.size() > 1) {
       return aws
               ? templates.get(1).update(sql, args)
               : templates.get(0).update(sql, args);
@@ -41,7 +41,7 @@ public class MyJdbcTemplate extends JdbcTemplate {
 
   public List<Map<String, Object>> queryForList(String sql, Boolean aws, Object... args) throws DataAccessException {
     List<Map<String, Object>> listAzure = templates.get(0).queryForList(sql, args);
-    if (!templates.isEmpty()) {
+    if (templates.size() > 1) {
       List<Map<String, Object>> listAws = templates.get(1).queryForList(sql, args);
       return aws ? listAws : listAzure;
     }

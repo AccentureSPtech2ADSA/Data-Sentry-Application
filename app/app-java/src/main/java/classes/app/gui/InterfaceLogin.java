@@ -254,7 +254,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
   public static void main(String args[]) {
-    String isGraphical = System.getenv().getOrDefault("XDG_CURRENT_DESKTO", "");
+    String isGraphical = System.getenv().getOrDefault("XDG_CURRENT_DESKTOP", "");
     if (isGraphical == null || isGraphical.equals("") || isGraphical.trim().length() == 0) {
       LoginCli cli = new LoginCli();
       if (cli.hasConsole()) {

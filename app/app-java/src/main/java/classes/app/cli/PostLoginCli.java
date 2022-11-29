@@ -30,6 +30,10 @@ public class PostLoginCli {
     try {
       ServerDAO serverDAO = new ServerDAO();
       ServerModel server = serverDAO.save(new ServerController().getServer(UserSingleton.user.getFkHospital()));
+      if (server == null) {
+        System.out.println("Servidor parado ou apagado.");
+        return;
+      }
       System.out.println("Serial server: " + server.getSerialServer());
 
       ComponentDAO componentDAO = new ComponentDAO();
@@ -52,33 +56,37 @@ public class PostLoginCli {
         @Override
         public void run() {
 
-          Date date = new Date();
-          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
-          String now = sdf.format(date);
+          if (!serverDAO.componentExists(server) && server.getIsActive().equalsIgnoreCase("S")) {
+            LOGGER.warning("Servidor Parado... Mude no site para voltar a captar dados", "components");
+          } else {
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
+            String now = sdf.format(date);
 
-          ProcessDAO processDao = new ProcessDAO();
-          LogProcessComponentDAO logDao = new LogProcessComponentDAO();
-          System.out.println("Monitorando: " + now);
-          new ProcessController()
-                  .getProcessPerMemo()
-                  .forEach(process -> {
-                    try {
+            ProcessDAO processDao = new ProcessDAO();
+            LogProcessComponentDAO logDao = new LogProcessComponentDAO();
+            System.out.println("Monitorando: " + now);
+            new ProcessController()
+                    .getProcessPerMemo()
+                    .forEach(process -> {
+                      try {
 
-                      ProcessModel saveProcess = processDao.saveProcess(process);
-                      // get logs too
-                      LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
-                      LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
-                      LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
+                        ProcessModel saveProcess = processDao.saveProcess(process);
+                        // get logs too
+                        LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
+                        LogComponentProcess logDisco = new LogComponentProcess(discos.get(0), saveProcess);
+                        LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
 
-                      logDao.save(logCpu, now);
-                      logDao.save(logDisco, now);
-                      logDao.save(logRam, now);
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                      LOGGER.error(e.getMessage(), "components");
+                        logDao.save(logCpu, now);
+                        logDao.save(logDisco, now);
+                        logDao.save(logRam, now);
+                      } catch (Exception e) {
+                        e.printStackTrace();
+                        LOGGER.error(e.getMessage(), "components");
+                      }
+                    });
+          }
 
-                    }
-                  });
         }
       }, 0, 1000 * 60);
 

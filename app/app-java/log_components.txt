@@ -128,3 +128,69 @@
 27/11/2022 04:17:29 - Info - RAM com serial: 756936249 ja foi inserido.
 27/11/2022 04:17:30 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
 27/11/2022 04:17:31 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 16:36:40 - Info - Inserindo servidor: 
+27/11/2022 16:36:40 - Error - Index 1 out of bounds for length 1
+27/11/2022 16:38:38 - Warning - Servidor com serial: 0242896B6294 ja foi inserido.
+27/11/2022 16:38:40 - Info - Inserindo RAM: 
+27/11/2022 16:38:41 - Info - Inserindo CPU: 
+27/11/2022 16:38:42 - Info - Inserindo DISCO: 
+27/11/2022 16:47:24 - Info - Inserindo servidor AWS: 
+27/11/2022 16:47:24 - Warning - Servidor com serial: 0242896B6294 ja foi inserido.
+27/11/2022 16:47:29 - Info - RAM com serial: 1262869688 ja foi inserido.
+27/11/2022 16:47:31 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 16:47:32 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 16:50:50 - Warning - Servidor com serial: 0242896B6294 ja foi inserido.
+27/11/2022 16:50:54 - Info - RAM com serial: 1207231495 ja foi inserido.
+27/11/2022 16:50:55 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 16:50:56 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 17:10:26 - Warning - Servidor com serial: 0242896B6294 ja foi inserido.
+27/11/2022 17:10:30 - Info - RAM com serial: 1207231495 ja foi inserido.
+27/11/2022 17:10:31 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 17:11:18 - Warning - Servidor com serial: 0242896B6294 ja foi inserido.
+27/11/2022 17:11:20 - Info - RAM com serial: 181252244 ja foi inserido.
+27/11/2022 17:11:21 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 17:11:22 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+27/11/2022 18:47:57 - Warning - Servidor com serial: 0242896B6294 ja foi inserido.
+27/11/2022 18:48:10 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+27/11/2022 18:48:18 - Info - RAM com serial: 1289565799 ja foi inserido.
+27/11/2022 18:48:26 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+28/11/2022 19:49:27 - Info - Inserindo servidor: 
+28/11/2022 19:49:40 - Info - Inserindo CPU: 
+28/11/2022 19:49:48 - Info - Inserindo RAM: 
+28/11/2022 19:49:56 - Info - Inserindo DISCO: 
+28/11/2022 19:50:42 - Info - Inserindo processo: 
+29/11/2022 05:18:45 - Info - Inserindo servidor: 
+29/11/2022 05:18:47 - Info - Inserindo RAM: 
+29/11/2022 05:18:49 - Info - Inserindo CPU: 
+29/11/2022 05:18:51 - Info - Inserindo DISCO: 
+29/11/2022 05:20:00 - Warning - Servidor com serial: 02424A923DCF ja foi inserido.
+29/11/2022 05:20:03 - Info - RAM com serial: 38603201 ja foi inserido.
+29/11/2022 05:20:04 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+29/11/2022 05:20:04 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.
+29/11/2022 05:20:38 - Info - Inserindo processo: 
+29/11/2022 05:28:48 - Info - Inserindo processo: 
+29/11/2022 05:28:49 - Error - PreparedStatementCallback; uncategorized SQLException for SQL [INSERT INTO Process (name) VALUES (?)]; SQL state [S0001]; error code [2628]; String or binary data would be truncated in table 'datasentry.dbo.Process', column 'name'. Truncated value: 'kworker/u16:3-kcryptd/253'.; nested exception is com.microsoft.sqlserver.jdbc.SQLServerException: String or binary data would be truncated in table 'datasentry.dbo.Process', column 'name'. Truncated value: 'kworker/u16:3-kcryptd/253'.
+29/11/2022 05:30:37 - Error - PreparedStatementCallback; uncategorized SQLException for SQL [DELETE FROM Server WHERE _serialServer = ?]; SQL state [null]; error code [0]; The statement did not return a result set.; nested exception is com.microsoft.sqlserver.jdbc.SQLServerException: The statement did not return a result set.
+29/11/2022 05:32:04 - Info - Inserindo servidor: 
+29/11/2022 05:32:07 - Info - Inserindo RAM: 
+29/11/2022 05:32:08 - Info - Inserindo CPU: 
+29/11/2022 05:32:09 - Info - Inserindo DISCO: 
+29/11/2022 05:33:11 - Warning - Servidor Parado... Mude no site para voltar a captar dados
+29/11/2022 05:34:10 - Warning - Servidor Parado... Mude no site para voltar a captar dados
+29/11/2022 05:35:10 - Warning - Servidor Parado... Mude no site para voltar a captar dados
+29/11/2022 05:36:10 - Warning - Servidor Parado... Mude no site para voltar a captar dados
+29/11/2022 05:38:26 - Info - Inserindo servidor: 
+29/11/2022 05:38:29 - Info - Inserindo RAM: 
+29/11/2022 05:38:30 - Info - Inserindo CPU: 
+29/11/2022 05:38:31 - Info - Inserindo DISCO: 
+29/11/2022 05:39:32 - Warning - Servidor Parado... Mude no site para voltar a captar dados
+29/11/2022 05:40:32 - Warning - Servidor Parado... Mude no site para voltar a captar dados
+29/11/2022 05:43:48 - Error - null
+29/11/2022 05:43:48 - Error - Houve algo errado em capturar dados do servidor...
+29/11/2022 05:44:41 - Info - Inserindo servidor: 
+29/11/2022 05:44:41 - Error - PreparedStatementCallback; SQL [INSERT INTO Server (_serialServer, isActive, description, fkHospital) VALUES (?, ?, ?, ?)Violation of PRIMARY KEY constraint 'PK__Server__F59EF81E29562D94'. Cannot insert duplicate key in object 'dbo.Server'. The duplicate key value is (02424A923DCF).; nested exception is com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK__Server__F59EF81E29562D94'. Cannot insert duplicate key in object 'dbo.Server'. The duplicate key value is (02424A923DCF).
+29/11/2022 05:46:19 - Error - null
+29/11/2022 05:53:55 - Warning - Servidor com serial: 02424A923DCF ja foi inserido.
+29/11/2022 05:53:58 - Info - RAM com serial: 38603201 ja foi inserido.
+29/11/2022 05:53:59 - Info - CPU com serial: BFEBFBFF008006EC ja foi inserido.
+29/11/2022 05:53:59 - Info - DISCO com serial: SS0X49601L3BR0AK5063 ja foi inserido.

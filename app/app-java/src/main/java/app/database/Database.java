@@ -35,13 +35,13 @@ public class Database {
     BasicDataSource datasourceAzure = azure.getDatasource();
     BasicDataSource datasourceAws = docker.getDatasource();
 //    BasicDataSource datasourceLocal = local.getDatasource();
-    System.out.println(datasourceAws.getUrl());
-    System.out.println(datasourceAzure.getUrl());
     List<JdbcTemplate> templates = new ArrayList<>();
     if (datasourceAzure != null) {
+      System.out.println(datasourceAzure.getUrl());
       templates.add(new JdbcTemplate(datasourceAzure));
     }
     if (datasourceAws != null) {
+      System.out.println(datasourceAws.getUrl());
       templates.add(new JdbcTemplate(datasourceAws));
     }
 //    if (datasourceLocal != null) {
