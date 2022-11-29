@@ -41,7 +41,6 @@ public enum Ambiente {
       System.out.println("Nao foi possivel conectar com o banco de dados SQL Server na Azure.");
       dbData = DatabaseData.MSSQL_AWS;
       System.out.println("Tentando acessar o banco de dados MSSQL_AWS no Docker... ");
-      return null;
     }
     return dataSource;
   }

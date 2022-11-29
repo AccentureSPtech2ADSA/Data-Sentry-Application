@@ -137,30 +137,34 @@ public class InterfacePosLogin extends javax.swing.JFrame {
           @Override
           public void run() {
 
-            Date date = new Date();
-            date.setHours(date.getHours() - 1);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
-            String now = sdf.format(date);
+            if (serverDAO.componentExists(server) && server.getIsActive().equalsIgnoreCase("S")) {
+              LOGGER.warning("Servidor Parado... Mude no site para voltar a captar dados", "components");
+            } else {
+              Date date = new Date();
+              date.setHours(date.getHours() - 1);
+              SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s.S");
+              String now = sdf.format(date);
 
-            ProcessDAO processDao = new ProcessDAO();
-            System.out.println("Monitorando: " + now);
-            new ProcessController()
-                    .getProcessPerMemo()
-                    .forEach(process -> {
-                      LogProcessComponentDAO logDao = new LogProcessComponentDAO();
-                      try {
-                        ProcessModel saveProcess = processDao.saveProcess(process);
-                        LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
-                        LogComponentProcess logDisco = new LogComponentProcess(disco, saveProcess);
-                        LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
-                        logDao.save(logCpu, now);
-                        logDao.save(logDisco, now);
-                        logDao.save(logRam, now);
-                      } catch (Exception e) {
-                        e.printStackTrace();
-                        LOGGER.error(e.getMessage(), "components");
-                      }
-                    });
+              ProcessDAO processDao = new ProcessDAO();
+              System.out.println("Monitorando: " + now);
+              new ProcessController()
+                      .getProcessPerMemo()
+                      .forEach(process -> {
+                        LogProcessComponentDAO logDao = new LogProcessComponentDAO();
+                        try {
+                          ProcessModel saveProcess = processDao.saveProcess(process);
+                          LogComponentProcess logCpu = new LogComponentProcess(cpu, saveProcess);
+                          LogComponentProcess logDisco = new LogComponentProcess(disco, saveProcess);
+                          LogComponentProcess logRam = new LogComponentProcess(ram, saveProcess);
+                          logDao.save(logCpu, now);
+                          logDao.save(logDisco, now);
+                          logDao.save(logRam, now);
+                        } catch (Exception e) {
+                          e.printStackTrace();
+                          LOGGER.error(e.getMessage(), "components");
+                        }
+                      });
+            }
           }
         }, 0, 1000 * 60);
       }

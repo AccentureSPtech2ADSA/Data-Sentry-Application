@@ -1,15 +1,13 @@
 package app.dao;
 
-import app.controller.ProcessController;
+import app.model.ComponentTypeEnum;
 import app.model.LogComponentProcess;
-import app.model.ProcessModel;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 public class LogProcessComponentDAO extends Dao {
 
   public Integer save(LogComponentProcess model, String date) {
+    if(model.getComponent().getComponentType() == ComponentTypeEnum.DISCO){
+      model.setUsageComponent(model.getUsageComponent() * 10);
+    }
     String query = "INSERT INTO LogComponentPerProcess (fkProcess, fkComponentType, fkComponentServer, usageComponent, createdAt)"
             + "VALUES (?, ?, ?, ?, ?)";
     conn.updateAws(
